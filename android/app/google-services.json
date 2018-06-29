@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "235852435562",
+    "firebase_url": "https://haisandaiduong-39396.firebaseio.com",
+    "project_id": "haisandaiduong-39396",
+    "storage_bucket": "haisandaiduong-39396.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:235852435562:android:2756f16b598dff60",
+        "android_client_info": {
+          "package_name": "com.haisandaiduong"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "235852435562-nbqv08b409p6fmo8gsp55ffl2mtld6p3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haisandaiduong",
+            "certificate_hash": "a06d57eb38e5183fe52e02f5518ac3a26ebf33b8"
+          }
+        },
+        {
+          "client_id": "235852435562-13e0ji0kogmto6p5cr86970k5h37jrra.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "235852435562-13e0ji0kogmto6p5cr86970k5h37jrra.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBRBFFv6C5Jew3os23mqi6f2syuzpGh24"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "235852435562-13e0ji0kogmto6p5cr86970k5h37jrra.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
