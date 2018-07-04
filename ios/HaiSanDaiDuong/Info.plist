@@ -64,6 +64,18 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>Muli-Bold.ttf</string>
+		<string>Muli-BoldItalic.ttf</string>
+		<string>Muli-ExtraBold.ttf</string>
+		<string>Muli-ExtraLight.ttf</string>
+		<string>Muli-ExtraLightItalic.ttf</string>
+		<string>Muli-Italic.ttf</string>
+		<string>Muli-Light.ttf</string>
+		<string>Muli-LightItalic.ttf</string>
+		<string>Muli-Regular.ttf</string>
+		<string>Muli-Semi-BoldItalic.ttf</string>
+		<string>Muli-SemiBold.ttf</string>
+		<string>Muli.ttf</string>
 	</array>
 </dict>
 </plist>

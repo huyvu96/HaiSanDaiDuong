@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     titleCommic: {
         fontSize: height / 40,
         fontWeight: 'normal',
-        color: '#007ACC',
+        color: '#333333',
         textAlign:'center',
         marginBottom: height / 100,
     },

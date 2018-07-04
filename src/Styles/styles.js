@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { StyleSheet, Dimensions } from 'react-native';
-
+import global from './global';
 const {height, width} = Dimensions.get('window');
 
 export const imageWidth = width;
 export const imageHeight = (imageWidth / 500) *330;
 
 export default StyleSheet.create({
-    container: { flex: 1, backgroundColor: '#ecf0f1',},
+    container: { flex: 1, backgroundColor: global.coloF3,},
     viewHome: {flexDirection: 'row', justifyContent:'center', padding: height/80, position: 'absolute', right: width /6,left: width/6,top: height/ 35,zIndex:100,backgroundColor: 'transparent'},
     styleOnPress: {color: 'white', opacity: 0.54, fontSize: height/45},
     styleUnPress:{opacity: 1,fontSize: height/40},
     styleDivide: {width: height/800, height: height/100, backgroundColor:'white', margin: height/100, alignSelf: 'center'},
-    imageItemtop:{height: height/2.5,width: width/2,resizeMode: 'cover',},
+    imageItemtop:{height: height/3,width: width/2,resizeMode: 'cover',},
     imageItemtopLinear:{height: height/2.5,width: width/2,position: 'absolute'},
     imageItemtopEpisode:{height: height/4,width: width/3,resizeMode: 'contain',},
     imageItemtopEpisodeLinear:{height: height/4,width: width/3,position: 'absolute'},
@@ -29,7 +29,7 @@ export default StyleSheet.create({
     styleIconFuntionVideo: {fontSize: height/20, color: 'white'},
     styleTextFuntionVideo: {alignSelf:'center',  fontSize: height/60,color: 'white', textAlign:'center'},
     styleViewItemBottom:{position: 'absolute', right: 0,left: 2,bottom: 5,zIndex:100,   },
-    styleTextName: {marginLeft: 5, color: 'white', fontSize:height/40, opacity: 0.8},
+    styleTextName: {marginLeft: 10, color: global.colorTextPrimary, fontSize:height/40, opacity: 0.8, fontFamily: global.fontRegular, fontWeight: global.fontWeightDark},
     styleViewItemTop:{flexDirection: 'row',position: 'absolute',right: 5,top: 5, zIndex:100,alignItems:'center'},
     styleIconItemTop:{fontSize: height/40, color: 'white'},
     styleTextNumPerson: {alignSelf:'center', marginLeft: 5, fontSize: height/50, color: 'white'},
@@ -90,7 +90,13 @@ export default StyleSheet.create({
     },
     viewAcdicator:{
         height: height/5,alignItems:'center',justifyContent:'center'
-    }
+    },
+    modal: {
+        flex:1,
+        //flexDirection:'row',
+        height: '95%',
+        borderRadius: 5
+      },
     // containerE: {
     //     backgroundColor: 'transparent',
     //     flex: 1,
