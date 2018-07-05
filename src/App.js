@@ -43,14 +43,14 @@ const TabBar = createBottomTabNavigator({
             showLabel: false,
             showIcon: true,
             style: {
-                backgroundColor: global.colorTextPrimary,
+                backgroundColor: global.colorF4,
                 borderTopColor: 'white',
                 borderTopWidth: 0.18,
                 height: height / 14,
                
             },
             inactiveTintColor: global.colorA5,
-            activeTintColor: 'white',
+            activeTintColor: global.colorTextPrimary,
             indicatorStyle: {
                 backgroundColor: 'transparent',
             },
