@@ -18,14 +18,14 @@ const TextComponent = ({text, style, numberOfLines = 1, allowFontScaling =true, 
     let fontSize = size;
     let fontWeight = bold;
     let propsText = {
-        style: [styleVar,{color, fontSize, fontWeight, fontFamily}]
+        //style: [styleVar,{color, fontSize, fontWeight, fontFamily}]
     };
     if (numberOfLines !== -1) {
         propsText.numberOfLines = numberOfLines;
     }
     propsText.allowFontScaling = allowFontScaling;
     return (
-        <Text {...propsText}>
+        <Text {...propsText} style ={[{color, fontSize, fontWeight, fontFamily}, style]}>
             {textVar.toString()}
         </Text>
     );

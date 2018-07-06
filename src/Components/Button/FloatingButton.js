@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, FlatList,StyleSheet,TouchableNativeFeedback,Image,Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 const { height } = Dimensions.get('window');
-import global from '../Styles/global'
+import global from '../../Styles/global'
 export default class FloatingButton extends Component {
     render() {
         return (

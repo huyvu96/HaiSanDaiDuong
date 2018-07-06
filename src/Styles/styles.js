@@ -29,7 +29,7 @@ export default StyleSheet.create({
     styleIconFuntionVideo: {fontSize: height/20, color: 'white'},
     styleTextFuntionVideo: {alignSelf:'center',  fontSize: height/60,color: 'white', textAlign:'center'},
     styleViewItemBottom:{position: 'absolute', right: 0,left: 2,bottom: 5,zIndex:100,   },
-    styleTextName: {marginLeft: 10, color: global.colorTextPrimary, fontSize:height/40, opacity: 0.8, fontFamily: global.fontRegular, fontWeight: global.fontWeightDark},
+    styleTextName: {marginLeft: 10, color: global.colorTextPrimary, fontSize:height/40, opacity: 0.8, fontFamily: global.fontRegular, fontWeight: '400'},
     styleViewItemTop:{flexDirection: 'row',position: 'absolute',right: 5,top: 5, zIndex:100,alignItems:'center'},
     styleIconItemTop:{fontSize: height/40, color: 'white'},
     styleTextNumPerson: {alignSelf:'center', marginLeft: 5, fontSize: height/50, color: 'white'},

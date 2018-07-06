@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform,StyleSheet, Dimensions, View, Animated, Text, TouchableWithoutFeedback,Image,ImageBackground } from 'react-native';
+import {StyleSheet, Dimensions, Animated} from 'react-native';
 import { TabViewAnimated, TabBar } from 'react-native-tab-view';
 import global from '../../Styles/global'; 
 import PropTypes from "prop-types";
@@ -8,7 +8,7 @@ const initialLayout = {
   height: 0,
   width: Dimensions.get('window').width,
 };
-export default class TabItems extends React.Component<*, State> {
+export default class TabItems extends React.Component {
   state = {
     index: this.props.index,
     routes: this.props.routes
