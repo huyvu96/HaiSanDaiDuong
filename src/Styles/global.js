@@ -41,6 +41,7 @@ export default  {
     color66: '#666666',
     colorF4: '#f4f4f4',
     colorF3: '#F3F3F3',
+    colorFF: '#FFFFFF',
     color53: '#535353',
     color64: '#646464',
     colorBb: '#BBBBBB',

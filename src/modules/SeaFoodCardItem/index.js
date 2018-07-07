@@ -5,6 +5,8 @@ import styles from './styles';
 import LinearGradient from 'react-native-linear-gradient';
 import global from '../../Styles/global';
 import TextComponent from "../../Components/Text/Text";
+import ButtonWithIcon from "../../Components/Button/ButtonWithIcon";
+import IconButton from "../../Components/Button/IconButton";
 
 const {height, width} = Dimensions.get('window');
 
@@ -21,7 +23,7 @@ class SeaFoodItem extends Component {
     }
 
     render() {
-        const {uriImage, title, subText, onClick} = this.props;
+        const {uriImage, title, subText, onClick, onBuy,onChecked} = this.props;
         return (
             <TouchableWithoutFeedback onPress ={onClick}>
                 <Animated.View style={[styles.viewItem,{
@@ -34,6 +36,7 @@ class SeaFoodItem extends Component {
                 }
                     ]
                 }]}>
+
                     <Image source={{uri: uriImage}} style={styles.imageItem}/>
                     {/* <LinearGradient colors={['rgba(0,0,0, 0)', 'rgba(0, 0, 0, 0)', 'rgba(0,0,0, 0.2)']}
                                     style={styles.imageItemLinear}/> */}
@@ -49,6 +52,14 @@ class SeaFoodItem extends Component {
                                    fontFamily={global.fontRegular} 
                                    text={"Giá: " + subText}/>
                     </View>
+                    {
+                        onChecked ? (<IconButton iconStyle={styles.iconStyle} btnStyle={styles.btnIconBuy} nameIcon={"ios-checkmark-circle"}/>) : (<ButtonWithIcon style={styles.btnBuy}
+                                                          buttonText={'Mua Ngay'}
+                                                          onClick={onBuy}
+                                                          styleText={{fontSize:global.size15}}
+                        />)
+                    }
+
                 </Animated.View>
             </TouchableWithoutFeedback>
         );
@@ -60,6 +71,8 @@ SeaFoodItem.propTypes = {
     uriImage: PropTypes.node,
     title: PropTypes.string,
     subText: PropTypes.string,
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
+    onBuy: PropTypes.func,
+    onChecked: PropTypes.bool
 };
 export default SeaFoodItem;

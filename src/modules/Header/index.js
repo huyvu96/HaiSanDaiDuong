@@ -23,6 +23,6 @@ Header.propTypes = {
   rightHeader: PropTypes.object,
   leftHeader: PropTypes.object,
   body: PropTypes.object,
-  customHeaderStyle: NativeText.propTypes.style
+  customHeaderStyle: PropTypes.oneOfType([PropTypes.number,PropTypes.object,PropTypes.array]),
 };
 export default  Header;

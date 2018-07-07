@@ -85,15 +85,15 @@ export default class App extends Component {
       }
     render() {
         return (
-            // <Provider store = {store}>
+            <Provider store = {store}>
             <View style= {{flex:1}}>
             <StatusBar
-                backgroundColor="#151114"
+                backgroundColor="#1DB2E0"
                 translucent = {false}
             />
                 <RootNavigator/>
             </View>           
-            // </Provider>
+            </Provider>
         );
     }
 }
