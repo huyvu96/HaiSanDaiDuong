@@ -88,7 +88,7 @@ export default class App extends Component {
             <Provider store = {store}>
             <View style= {{flex:1}}>
             <StatusBar
-                backgroundColor="#1DB2E0"
+                backgroundColor="#2980b9"
                 translucent = {false}
             />
                 <RootNavigator/>
