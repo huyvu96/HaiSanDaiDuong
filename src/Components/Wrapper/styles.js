@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Dimensions } from 'react-native';
+import global from "../../Styles/global";
 
 const {height, width} = Dimensions.get('window');
 
@@ -38,7 +39,7 @@ export default StyleSheet.create({
        backgroundColor: '#DEF3F6'
     },
     wraper2: {
-        marginTop: 10,
+        marginTop: 40,
         height: undefined,
         //backgroundColor: '#F0F0F0',
         //elevation: 3
@@ -73,13 +74,13 @@ export default StyleSheet.create({
         fontSize: height / 30,
         fontWeight: 'normal',
         marginLeft: height / 60,
-        color: '#333333'
+        color: global.red
     },
     tron: {
         backgroundColor: 'transparent',
         fontSize: height/30,
         fontWeight: 'bold',
-        color: '#e74c3c',
+        color: global.colorTextPrimary,
         marginLeft: height/80,
         alignSelf:'center'
         //borderRadius: height/30

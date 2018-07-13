@@ -16,7 +16,6 @@ const { height, width } = Dimensions.get('window');
 const TabBar = createBottomTabNavigator({
         Home: Home,
         Discover: Discover,
-        History: History,
         Notification: Notification,
         Account: Account},
     {
@@ -26,19 +25,16 @@ const TabBar = createBottomTabNavigator({
               let iconName;
               switch(routeName){
                   case 'Home':
-                  iconName = (<Ionicons name="ios-home-outline" style={{fontSize: 35, color: tintColor}}/>);
+                  iconName = (<Ionicons name="md-home" style={{fontSize: 35, color: tintColor}}/>);
                   break;
                   case 'Discover':
-                      iconName = (<Ionicons name="ios-planet-outline" style={{fontSize: 35, color: tintColor}}/>);
+                      iconName = (<Ionicons name="md-globe" style={{fontSize: 35, color: tintColor}}/>);
                       break;
-                  case 'History':
-                  iconName = (<Ionicons name="ios-list-box-outline" style={{fontSize: 35, color: tintColor}}/>);
-                  break;
                   case 'Notification':
-                      iconName = (<Ionicons name="ios-notifications-outline" style={{fontSize: 35, color: tintColor}}/>);
+                      iconName = (<Ionicons name="md-notifications" style={{fontSize: 35, color: tintColor}}/>);
                       break;
                   case 'Account':
-                  iconName = (<Ionicons name="ios-contact-outline" style={{fontSize: 35, color: tintColor}}/>);
+                  iconName = (<Ionicons name="md-contact" style={{fontSize: 35, color: tintColor}}/>);
                   break;
               }
               return iconName;

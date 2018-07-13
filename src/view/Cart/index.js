@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Dimensions,} from 'react-native';
+import {View, Dimensions, KeyboardAvoidingView,Keyboard} from 'react-native';
 import styles from '../../Styles/styles';
 import global from '../../Styles/global';
 import Text from '../../Components/Text/Text';
@@ -21,7 +21,15 @@ class Cart extends Component {
         numPhone: '',
         note: ''
     }
+    componentWillMount () {
+        this.keyboardWillShowSub = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
+        this.keyboardWillHideSub = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
+    }
 
+    componentWillUnmount() {
+        this.keyboardWillShowSub.remove();
+        this.keyboardWillHideSub.remove();
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -72,7 +80,8 @@ class Cart extends Component {
                     paddingBottom: 20,
                     alignSelf: 'flex-end'
                 }}>
-                    <ButtonWithIcon buttonText={this.props.dataCart.length ===0 ? 'Giỏ hàng trống':'Đặt hàng ngay'} onClick={() => (this.props.dataCart.length === 0 ? console.log('onClick') : this.setState({isOpen: true}))}/>
+                    <ButtonWithIcon buttonText={this.props.dataCart.length === 0 ? 'Giỏ hàng trống' : 'Đặt hàng ngay'}
+                                    onClick={() => (this.props.dataCart.length === 0 ? console.log('onClick') : this.setState({isOpen: true}))}/>
                 </View>
                 <ModalBox
                     style={{
@@ -91,80 +100,83 @@ class Cart extends Component {
                     onOpened={() => console.log('onOpen')}
                     backdropPressToClose={false}
                     onClosingState={() => this.setState({isOpen: false})}>
-                    <Text text={'Thêm thông tin cho đơn hàng'}
-                          color={global.colorF3}
-                          fontFamily={global.fontBold}
-                          size={global.sizeP20}
-                          style={{textAlign: 'center', marginBottom: 20}}/>
+                    <KeyboardAvoidingView behavior="padding">
+                        <Text text={'Thêm thông tin cho đơn hàng'}
+                              color={global.colorF3}
+                              fontFamily={global.fontBold}
+                              size={global.sizeP20}
+                              style={{textAlign: 'center', marginBottom: 20}}/>
 
-                    <TextInput
-                        value={this.state.numPhone}
-                        onChangeText={input => this.setState({numPhone: input})}
-                        nameIcon={'ios-call-outline'}
-                        placeholder={'Hãy để lại số điện thoại của bạn'}
-                        warning={true}
-                        keyboardType={'numeric'}
-                        maxLength={11}
-                        returnKeyType={'done'}/>
-                    <TextInput
-                        value={this.state.note}
-                        onChangeText={input => this.setState({note: input})}
-                        nameIcon={'ios-clipboard-outline'}
-                        placeholder={'Ghi chú khác'}
-                        multiline={true}
-                        style={{textAlignVertical: "top"}}
-                        maxLength={100}
-                        returnKeyType={'done'}
-                        returnKeyLabel={'Done'}
-                        keyboardType={'email-address'}
-                        numberOfLines={4}/>
-                    <View style={{flexDirection: 'row'}}>
-                        <ButtonWithIcon
-                            onClick={() => this.setState({isOpen:false})}
-                            buttonText={'Tiếp tục mua hàng'}
-                            style={{
-                                margin: 5,
-                                //width: (width / 2) - 100,
-                                height: 40,
-                                backgroundColor: global.colorF3,
-                                borderRadius: 20,
-                                //alignSelf: 'center',
-                                flex: 1,
-                                alignItems: 'center',
-                                justifyContent: 'center'
-                            }}
-                            styleText={{
-                                color: global.colorTextPrimary,
-                                fontSize: global.sizeP14,
-                                fontFamily: global.fontBold,
-                                alignSelf: 'center',
-                                textDecorationLine: 'underline',
-                                textAlign: 'center'
-                            }}
-                        />
-                        <ButtonWithIcon
-                            buttonText={'Gửi đơn hàng'}
-                            style={{
-                                margin: 5,
-                                //width: (width / 2) - 100,
-                                height: 40,
-                                backgroundColor: global.red,
-                                borderRadius: 20,
-                                flex: 1,
-                                //alignSelf: 'center',
-                                alignItems: 'center',
-                                justifyContent: 'center'
-                            }}
-                            styleText={{
-                                color: global.colorFF,
-                                fontSize: global.sizeP14,
-                                fontFamily: global.fontBold,
-                                alignSelf: 'center',
-                                textDecorationLine: 'underline',
-                                textAlign: 'center'
-                            }}
-                        />
-                    </View>
+                        <TextInput
+                            value={this.state.numPhone}
+                            onChangeText={input => this.setState({numPhone: input})}
+                            nameIcon={'ios-call-outline'}
+                            placeholder={'Hãy để lại số điện thoại của bạn'}
+                            warning={true}
+                            keyboardType={'numeric'}
+                            maxLength={11}
+                            returnKeyType={'done'}/>
+                        <TextInput
+                            value={this.state.note}
+                            onChangeText={input => this.setState({note: input})}
+                            nameIcon={'ios-clipboard-outline'}
+                            placeholder={'Ghi chú khác'}
+                            multiline={true}
+                            style={{textAlignVertical: "top"}}
+                            maxLength={100}
+                            returnKeyType={'done'}
+                            returnKeyLabel={'Done'}
+                            keyboardType={'email-address'}
+                            numberOfLines={4}/>
+                        <View style={{flexDirection: 'row'}}>
+                            <ButtonWithIcon
+                                onClick={() => this.setState({isOpen: false})}
+                                buttonText={'Tiếp tục mua hàng'}
+                                style={{
+                                    margin: 5,
+                                    //width: (width / 2) - 100,
+                                    height: 40,
+                                    backgroundColor: global.colorF3,
+                                    borderRadius: 20,
+                                    //alignSelf: 'center',
+                                    flex: 1,
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}
+                                styleText={{
+                                    color: global.colorTextPrimary,
+                                    fontSize: global.sizeP14,
+                                    fontFamily: global.fontBold,
+                                    alignSelf: 'center',
+                                    textDecorationLine: 'underline',
+                                    textAlign: 'center'
+                                }}
+                            />
+                            <ButtonWithIcon
+                                buttonText={'Gửi đơn hàng'}
+                                style={{
+                                    margin: 5,
+                                    //width: (width / 2) - 100,
+                                    height: 40,
+                                    backgroundColor: global.red,
+                                    borderRadius: 20,
+                                    flex: 1,
+                                    //alignSelf: 'center',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}
+                                styleText={{
+                                    color: global.colorFF,
+                                    fontSize: global.sizeP14,
+                                    fontFamily: global.fontBold,
+                                    alignSelf: 'center',
+                                    textDecorationLine: 'underline',
+                                    textAlign: 'center'
+                                }}
+                            />
+                        </View>
+                    </KeyboardAvoidingView>
+
                 </ModalBox>
             </View>
         );
