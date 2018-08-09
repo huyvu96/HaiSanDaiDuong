@@ -55,6 +55,7 @@ class SeaFoodGirdView extends Component {
                 numColumns={2}
                 automaticallyAdjustContentInsets={true}
                 extraData={this.props}
+                onScroll={this.props.onScroll}
                 showsVerticalScrollIndicator={false}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({item, index}) =>

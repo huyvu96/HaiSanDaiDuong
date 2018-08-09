@@ -17,7 +17,7 @@ const data = ['http://sohanews.sohacdn.com/thumb_w/660/2017/1-1487250380868-27-0
 
 class Discover extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             visiableSwiper: false,
             swipeToClose: true,
@@ -54,7 +54,8 @@ class Discover extends Component {
                             fontFamily={global.fontLight}
                             bold={global.fontWeightDark}/>}
                         rightHeader={
-                            <IconButton nameIcon='ios-search'
+                            <IconButton
+                                nameIcon='ios-search'
                                         iconStyle={{fontSize: 35, color: global.colorF3}}/>}
                     />
                     <View style={styles.wraperSwiper1}>

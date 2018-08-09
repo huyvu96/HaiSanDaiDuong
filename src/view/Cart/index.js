@@ -9,7 +9,6 @@ import SeaFoodListView from "../../modules/SeaFoodListView";
 import * as ACTION from "../../Redux/ActionCreator/cartActionCreator";
 import {connect} from "react-redux";
 import ButtonWithIcon from "../../Components/Button/ButtonWithIcon";
-
 const {height, width} = Dimensions.get('window');
 import Currency from '../../Global/Currency';
 import ModalBox from 'react-native-modalbox';
@@ -94,11 +93,11 @@ class Cart extends Component {
                         //flex:1
                     }}
                     isOpen={this.state.isOpen}
-                    swipeToClose={true}
+                    swipeToClose={false}
                     position='center'
-                    onClosed={() => console.log('onClosed')}
+                    onClosed={() => this.setState({isOpen: false})}
                     onOpened={() => console.log('onOpen')}
-                    backdropPressToClose={false}
+                    backdropPressToClose={true}
                     onClosingState={() => this.setState({isOpen: false})}>
                     <KeyboardAvoidingView behavior="padding">
                         <Text text={'Thêm thông tin cho đơn hàng'}
@@ -153,6 +152,7 @@ class Cart extends Component {
                                 }}
                             />
                             <ButtonWithIcon
+                                onClick={() => this.props.uploadCartItem(this.props.dataCart, this.props.userInfo.uid)}
                                 buttonText={'Gửi đơn hàng'}
                                 style={{
                                     margin: 5,
@@ -176,7 +176,6 @@ class Cart extends Component {
                             />
                         </View>
                     </KeyboardAvoidingView>
-
                 </ModalBox>
             </View>
         );
@@ -187,13 +186,15 @@ function mapStateToProps(state) {
     return {
         dataCart: state.cart.dataCart,
         dataShop: state.cart.dataShop,
-        total: state.cart.totalPrice
+        total: state.cart.totalPrice,
+        userInfo: state.login.userInfo
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         addItemToCart: items => dispatch(ACTION.addItemToCart(items)),
+        uploadCartItem: (items,uid) => dispatch(ACTION.updateLoadCartProduct(items,uid))
     };
 }
 

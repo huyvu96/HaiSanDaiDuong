@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
+import {View,UIManager,LayoutAnimation} from 'react-native';
 import styles from '../../Styles/styles';
 import data from '../../data';
 import SeaFoodGridView from '../../modules/SeaFoodGridView';
@@ -28,24 +28,66 @@ class Home extends Component {
                 {key: '2', title: 'Cá sống'},
                 {key: '3', title: 'Cua - Ghẹ'},
                 {key: '4', title: 'Sò - Ốc'},
-                {key: '5', title: 'Tôm - Mực'},]
+                {key: '5', title: 'Tôm - Mực'},],
+            onScrolling: false,
         };
+        this._listViewOffset= 0;
+        this.onScrolling = false;
+        this._onScroll = this._onScroll.bind(this);
     }
     _alert(item){
         alert(JSON.stringify(this.props.dataCart));
     }
+    _onScroll(event) {
+        // Simple fade-in / fade-out animation
+        UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+        const CustomLayoutLinear = {
+            duration: 250,
+            create: {
+                type: LayoutAnimation.Types.linear,
+                property: LayoutAnimation.Properties.opacity
+            },
+            update: {
+                type: LayoutAnimation.Types.linear,
+                property: LayoutAnimation.Properties.opacity
+            },
+            delete: {
+                type: LayoutAnimation.Types.linear,
+                property: LayoutAnimation.Properties.opacity
+            }
+        };
+        // Check if the user is scrolling up or down by confronting the new scroll position with your own one
+        const currentOffset = event.nativeEvent.contentOffset.y;
+        if (Math.abs(currentOffset - this._listViewOffset) <= 50) {
+            return;
+        }
+        const direction =
+            currentOffset > 0 && currentOffset > this._listViewOffset ? "up" : "down";
+        // If the user is scrolling down (and the is still visible) hide it
+        const onScrolling = direction === "up";
+        if (
+            onScrolling !== this.state.onScrolling
+        ) {
+            LayoutAnimation.configureNext(CustomLayoutLinear);
+            //this.onScrolling = onScrolling;
+            this.setState({onScrolling});
+        }
+        console.log(this._listViewOffset, this.state.onScrolling);
+        // Update your scroll position
+        this._listViewOffset = currentOffset;
+    }
     _renderScene = ({route}) => {
         switch (route.key) {
             case '1':
-                return <SeaFoodGridView data={this.props.dataShop.filter(e => e.category === 1)}/>;
+                return <SeaFoodGridView onScroll={this._onScroll} data={this.props.dataShop.filter(e => e.category === 1)}/>;
             case '2':
-                return <SeaFoodGridView data={this.props.dataShop.filter(e => e.category === 2)}/>;
+                return <SeaFoodGridView onScroll={this._onScroll} data={this.props.dataShop.filter(e => e.category === 2)}/>;
             case '3':
-                return <SeaFoodGridView data={this.props.dataShop.filter(e => e.category === 3)}/>;
+                return <SeaFoodGridView onScroll={this._onScroll} data={this.props.dataShop.filter(e => e.category === 3)}/>;
             case '4':
-                return <SeaFoodGridView data={this.props.dataShop.filter(e => e.category === 4)}/>;
+                return <SeaFoodGridView onScroll={this._onScroll} data={this.props.dataShop.filter(e => e.category === 4)}/>;
             case '5':
-                return <SeaFoodGridView data={this.props.dataShop.filter(e => e.category === 5)}/>;
+                return <SeaFoodGridView onScroll={this._onScroll} data={this.props.dataShop.filter(e => e.category === 5)}/>;
             default:
                 return null;
         }
@@ -78,9 +120,9 @@ class Home extends Component {
                     onIndexChange={this._handleIndexChange}
                 />
                 {
-                    this.state.openPhone ? (null) : (<FloatingButton nameIcon='ios-call' onPress={() => {
+                    !this.state.openPhone ? (!this.state.onScrolling ? <FloatingButton nameIcon='ios-call' onPress={() => {
                         this.setState({openPhone: true})
-                    }}/>)
+                    }}/> : null):(null)
                 }
                 <ModalBox
                     style={{
@@ -92,12 +134,14 @@ class Home extends Component {
                         backgroundColor: global.colorTextPrimary
                     }}
                     isOpen={this.state.openPhone}
-                    swipeToClose={true}
+                    animationDuration ={0}
+                    swipeToClose={false}
                     position='center'
-                    onClosed={() => console.log('onClosed')}
-                    onOpened={() => console.log('onOpen')}
-                    backdropPressToClose={false}
-                    onClosingState={() => this.setState({openPhone: false})}>
+                    onClosed={() => this.setState({openPhone: false})}
+                    onOpened={() => this.setState({openPhone: true})}
+                    backdropPressToClose={true}
+                    onClosingState={() => this.setState({openPhone: false})}
+                    >
                     <Text text='Chọn số điện thoại gọi ngay nào'
                           color={global.colorF3}
                           fontFamily={global.fontRegular}

@@ -34,6 +34,18 @@ export default function userLoginReducer(state = defaultState, action) {
 
             }
             return {...state, totalPrice: total};
+        case NAME_ACTION.GET_PRODUCT_LOADING:
+            return {...state, isLoadingProduct: true};
+        case NAME_ACTION.GET_PRODUCT_SUCCESS:
+            return {...state, isLoadingProduct: false, dataShop : action.data};
+        case NAME_ACTION.GET_PRODUCT_FAIL:
+            return {...state, isLoadingProduct: false, dataShop : []};
+        case NAME_ACTION.UPLOAD_CART_PRODUCT_LOADING:
+            return {...state, isLoadingUploadCart: true};
+        case NAME_ACTION.UPLOAD_CART_PRODUCT_SUCCESS:
+            return {...state, isLoadingUploadCart: false, dataCart : []};
+        case NAME_ACTION.UPLOAD_CART_PRODUCT_FAIL:
+            return {...state, isLoadingUploadCart: false};
         default:
             return state;
     }
