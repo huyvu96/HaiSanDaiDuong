@@ -1,14 +1,11 @@
 import React, {Component} from 'react';
 import {View,Image,TouchableNativeFeedback} from 'react-native';
-import styles from '../../Styles/styles';
+import styles from './styles';
 import Text from '../../Components/Text/Text';
-import Header from '../../modules/Header/index';
-import IconButton from '../../Components/Button/IconButton';
 import global from "../../Styles/global";
 import Icon from 'react-native-vector-icons/Ionicons'
 import {connect} from 'react-redux';
 import {
-    LoginButton,
     AccessToken,
     LoginManager
 } from 'react-native-fbsdk';
@@ -68,34 +65,20 @@ class Login extends Component {
     render() {
         console.log('data ve',this.props.dataShop);
         return (
-            <View style={[styles.container,{justifyContent:'center'}]}>
+            <View style={styles.container}>
                 <Image
-                    style={{position:'absolute', right:0, left:0,top:0,bottom:0}}
+                    style={styles.image_background}
                     source={{uri: 'https://raw.githubusercontent.com/react-native-training/react-native-elements-app/master/assets/images/bg_screen3.jpg'}}
                 />
                 <TouchableNativeFeedback onPress={() => this.onFacebook()}>
                     <View
-                        style={{
-                            flexDirection: 'row',
-                            height: 50,
-                            width: null,
-                            backgroundColor: '#4267B2',
-                            marginTop: 15,
-                            paddingHorizontal: 25,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            alignSelf: 'center'
-                        }}
+                        style={styles.btn_login}
                     >
-                        <Icon name='logo-facebook' style={{
-                            fontSize: 30,
-                            color: 'white',
-                            alignSelf: 'center'
-                        }} />
+                        <Icon name='logo-facebook' style={styles.icon_facebook} />
                         <Text text={'Login with facebook'}
-                        size={global.sizeP20}
-                        color={global.colorFF}
-                        style={{marginLeft: 20}}/>
+                            size={global.sizeP20}
+                            color={global.colorFF}
+                            style={{marginLeft: 20}}/>
                     </View>
                 </TouchableNativeFeedback>
             </View>

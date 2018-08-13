@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {View} from 'react-native';
-import styles from '../../Styles/styles';
+import styles from './styles';
 import Text from '../../Components/Text/Text';
 import Header from '../../modules/Header/index';
 import IconButton from '../../Components/Button/IconButton';
@@ -30,7 +30,7 @@ class Notification extends Component {
                         fontFamily={global.fontLight}
                         bold={global.fontWeightDark}/>}
                     rightHeader={
-                        <IconButton nameIcon ='md-radio-button-on' iconStyle ={{fontSize: 35, color: global.colorF3}} />}
+                        <IconButton nameIcon ='md-radio-button-on' iconStyle ={styles.icon} />}
                 />
                 <NotificationListView data={this.props.dataVideo}/>
             </View>

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View, Dimensions, Image} from 'react-native';
-import styles from '../../Styles/styles';
+import styles from './styles';
 import Text from '../../Components/Text/Text';
 import Header from '../../modules/Header/index';
 import IconButton from '../../Components/Button/IconButton';
@@ -40,22 +40,15 @@ class Account extends Component {
                         fontFamily={global.fontLight}
                         bold={global.fontWeightDark}/>}
                     rightHeader={
-                        <IconButton nameIcon='ios-settings' iconStyle={{fontSize: 35, color: global.colorF3}}/>}
+                        <IconButton nameIcon='ios-settings' iconStyle={styles.icon}/>}
                 />
                 <Image source={{uri: photoURL}}
                        resizeMode={Image.resizeMode.cover}
                        blurRadius={0.5}
-                       style={{backgroundColor: global.colorC5, height: 200, width: '100%'}}
+                       style={styles.image}
                 />
                 <RoundAvatar uriImage={photoURL}
-                             avatarStyle={{
-                                 height: 80,
-                                 width: 80,
-                                 borderRadius: 60,
-                                 position: 'absolute',
-                                 top: 245 - 80 / 2,
-                                 right: width / 2 - 45
-                             }}/>
+                             avatarStyle={styles.round_avatar}/>
             </View>
         );
     }

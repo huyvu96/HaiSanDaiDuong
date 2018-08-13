@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View, Dimensions, KeyboardAvoidingView,Keyboard} from 'react-native';
-import styles from '../../Styles/styles';
+import styles from './styles';
 import global from '../../Styles/global';
 import Text from '../../Components/Text/Text';
 import Header from '../../modules/Header/index';
@@ -28,7 +28,7 @@ class Cart extends Component {
                 <Header
                     customHeaderStyle={{backgroundColor: global.colorTextPrimary}}
                     leftHeader={<IconButton nameIcon='ios-arrow-back'
-                                            iconStyle={{fontSize: 35, color: global.colorF3}}
+                                            iconStyle={styles.icon}
                                             onClick={() => this.props.navigation.goBack()}/>}
                     body={<Text
                         text='Giỏ hàng'
@@ -41,37 +41,16 @@ class Cart extends Component {
                         color={global.colorF3}
                         size={global.sizeP18}
                         fontFamily={global.fontBold}
-                        style={{
-                            backgroundColor: global.red,
-                            height: 30,
-                            width: 30,
-                            borderRadius: 20,
-                            textAlign: 'center'
-                        }}/>}
+                        style={styles.right_header}/>}
                 />
-                <View style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    backgroundColor: global.colorFF,
-                    //elevation: 2,
-                    margin: 5,
-                    padding: 10,
-                    borderRadius: 5,
-                    alignItems: 'center'
-                }}>
+                <View style={styles.view_tamtinh}>
                     <Text text={'Tạm tính: '} color={global.red} fontFamily={global.fontRegular} size={global.sizeP18}/>
                     <Text
                         text={(this.props.total !== '' ? Currency.convertNumberToCurrency(this.props.total) : '0') + ' VNĐ'}
                         color={global.red} fontFamily={global.fontRegularItalic} size={global.sizeP18}/>
                 </View>
                 <SeaFoodListView data={this.props.dataCart}/>
-                <View style={{
-                    width: '100%',
-                    paddingLeft: 20,
-                    paddingRight: 20,
-                    paddingBottom: 20,
-                    alignSelf: 'flex-end'
-                }}>
+                <View style={styles.view_list_card}>
                     <ButtonWithIcon buttonText={this.props.dataCart.length === 0 ? 'Giỏ hàng trống' : 'Đặt hàng ngay'}
                                     onClick={() => (this.props.dataCart.length === 0 ? console.log('onClick') : this.refs.modalOder.openModal())}/>
                 </View>
