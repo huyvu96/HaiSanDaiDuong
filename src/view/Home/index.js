@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View,UIManager,LayoutAnimation} from 'react-native';
-import styles from '../../Styles/styles';
+import styles from './styles';
 import data from '../../data';
 import SeaFoodGridView from '../../modules/SeaFoodGridView';
 import global from '../../Styles/global';
@@ -125,14 +125,7 @@ class Home extends Component {
                     }}/> : null):(null)
                 }
                 <ModalBox
-                    style={{
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        height: '30%',
-                        width: '80%',
-                        borderRadius: 20,
-                        backgroundColor: global.colorTextPrimary
-                    }}
+                    style={styles.modalbox}
                     isOpen={this.state.openPhone}
                     animationDuration ={0}
                     swipeToClose={false}
@@ -149,45 +142,13 @@ class Home extends Component {
                           style={{textAlign: 'center'}}/>
                     <ButtonWithIcon
                         buttonText='08888.333.333'
-                        style={{
-                            margin: 5,
-                            width: 200,
-                            height: 45,
-                            backgroundColor: global.colorF3,
-                            borderRadius: 20,
-                            alignSelf: 'center',
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}
-                        styleText={{
-                            color: global.colorTextPrimary,
-                            fontSize: global.sizeP16,
-                            fontFamily: global.fontBold,
-                            alignSelf: 'center',
-                            textDecorationLine: 'underline',
-                            textAlign: 'center'
-                        }}
+                        style={styles.btn_with_icon}
+                        styleText={styles.btn_with_icon_text}
                     />
                     <ButtonWithIcon
                         buttonText='08888.333.333'
-                        style={{
-                            margin: 5,
-                            width: 200,
-                            height: 45,
-                            backgroundColor: global.colorF3,
-                            borderRadius: 20,
-                            alignSelf: 'center',
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}
-                        styleText={{
-                            color: global.colorTextPrimary,
-                            fontSize: global.sizeP16,
-                            fontFamily: global.fontBold,
-                            alignSelf: 'center',
-                            textDecorationLine: 'underline',
-                            textAlign: 'center'
-                        }}
+                        style={styles.btn_with_icon}
+                        styleText={styles.btn_with_icon_text}
                     />
                 </ModalBox>
 

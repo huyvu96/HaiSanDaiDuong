@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {View} from 'react-native';
-import styles from '../../Styles/styles';
+import styles from './styles';
 import Text from '../../Components/Text/Text';
 import Header from '../../modules/Header/index';
 import IconButton from '../../Components/Button/IconButton';
@@ -18,7 +18,7 @@ class History extends Component {
         <View style={styles.container}>
             <Header
             customHeaderStyle={{backgroundColor: global.colorTextPrimary}}
-            leftHeader={<IconButton nameIcon ='ios-search' iconStyle ={{fontSize: 35, color: global.colorF3}}/>}
+            leftHeader={<IconButton nameIcon ='ios-search' iconStyle ={styles.icon}/>}
             body={<Text 
                 text='Lịch Sử Mua Hàng' 
                 color = {global.colorF3}
@@ -26,7 +26,7 @@ class History extends Component {
                 fontFamily={global.fontLight}
                 bold={global.fontWeightDark}/>}
             rightHeader={
-             <IconButton nameIcon ='md-list' iconStyle ={{fontSize: 35, color: global.colorF3}} />}
+             <IconButton nameIcon ='md-list' iconStyle ={styles.icon} />}
             />
         </View>
       );

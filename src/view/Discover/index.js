@@ -56,28 +56,14 @@ class Discover extends Component {
                         rightHeader={
                             <IconButton
                                 nameIcon='ios-search'
-                                        iconStyle={{fontSize: 35, color: global.colorF3}}/>}
+                                        iconStyle={styles.icon}/>}
                     />
                     <View style={styles.wraperSwiper1}>
                         {
                             this.state.visiableSwiper ? (this.state.visiableSwiper && <Swiper
                                 style={styles.wrapperSwiper}
-                                dot={<View style={{
-                                    backgroundColor: '#FFF',
-                                    width: 8,
-                                    height: 8,
-                                    borderRadius: 7,
-                                    marginLeft: 10,
-                                    marginRight: 10
-                                }}/>}
-                                activeDot={<View style={{
-                                    backgroundColor: global.colorTextPrimary,
-                                    width: 8,
-                                    height: 8,
-                                    borderRadius: 7,
-                                    marginLeft: 10,
-                                    marginRight: 10
-                                }}/>}
+                                dot={<View style={styles.dot}/>}
+                                activeDot={<View style={styles.act_dot}/>}
                                 autoplay={true}>
                                 {
                                     data.map((e, i) => {

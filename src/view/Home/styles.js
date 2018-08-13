@@ -14,54 +14,28 @@ export default StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: global.coloF3,
-        justifyContent: 'center',
     },
-    icon: {
-        fontSize: 35,
-        color: global.colorF3
-    },
-    right_header:{
-        backgroundColor: global.red,
-        height: 30,
-        width: 30,
-        borderRadius: 20,
-        textAlign: 'center'
-    },
-    view_tamtinh:{
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        backgroundColor: global.colorFF,
-        margin: 5,
-        padding: 10,
-        borderRadius: 5,
-        alignItems: 'center'
-    },
-    view_list_card:{
-        width: '100%',
-        paddingLeft: 20,
-        paddingRight: 20,
-        paddingBottom: 20,
-        alignSelf: 'flex-end',
-    },
-    modal_box:{
+    modalbox:{
         justifyContent: 'center',
         alignItems: 'center',
-        height: '55%',
+        height: '30%',
         width: '80%',
         borderRadius: 20,
-        backgroundColor: global.colorTextPrimary,
+        backgroundColor: global.colorTextPrimary
     },
     btn_with_icon:{
         margin: 5,
-        height: 40,
+        width: 200,
+        height: 45,
+        backgroundColor: global.colorF3,
         borderRadius: 20,
-        flex: 1,
+        alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center'
     },
     btn_with_icon_text:{
         color: global.colorTextPrimary,
-        fontSize: global.sizeP14,
+        fontSize: global.sizeP16,
         fontFamily: global.fontBold,
         alignSelf: 'center',
         textDecorationLine: 'underline',
