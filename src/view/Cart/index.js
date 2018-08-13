@@ -6,9 +6,11 @@ import Text from '../../Components/Text/Text';
 import Header from '../../modules/Header/index';
 import IconButton from '../../Components/Button/IconButton';
 import SeaFoodListView from "../../modules/SeaFoodListView";
-import * as ACTION from "../../Redux/ActionCreator/cartActionCreator";
+import * as cartAction from "../../Redux/ActionCreator/cartActionCreator";
 import {connect} from "react-redux";
+import { bindActionCreators } from "redux";
 import ButtonWithIcon from "../../Components/Button/ButtonWithIcon";
+import ModalOderView from '../../modules/ModalOderView';
 const {height, width} = Dimensions.get('window');
 import Currency from '../../Global/Currency';
 import ModalBox from 'react-native-modalbox';
@@ -19,16 +21,7 @@ class Cart extends Component {
         isOpen: false,
         numPhone: '',
         note: ''
-    }
-    componentWillMount () {
-        this.keyboardWillShowSub = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
-        this.keyboardWillHideSub = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
-    }
-
-    componentWillUnmount() {
-        this.keyboardWillShowSub.remove();
-        this.keyboardWillHideSub.remove();
-    }
+    };
     render() {
         return (
             <View style={styles.container}>
@@ -80,103 +73,13 @@ class Cart extends Component {
                     alignSelf: 'flex-end'
                 }}>
                     <ButtonWithIcon buttonText={this.props.dataCart.length === 0 ? 'Giỏ hàng trống' : 'Đặt hàng ngay'}
-                                    onClick={() => (this.props.dataCart.length === 0 ? console.log('onClick') : this.setState({isOpen: true}))}/>
+                                    onClick={() => (this.props.dataCart.length === 0 ? console.log('onClick') : this.refs.modalOder.openModal())}/>
                 </View>
-                <ModalBox
-                    style={{
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        height: '55%',
-                        width: '80%',
-                        borderRadius: 20,
-                        backgroundColor: global.colorTextPrimary,
-                        //flex:1
-                    }}
-                    isOpen={this.state.isOpen}
-                    swipeToClose={false}
-                    position='center'
-                    onClosed={() => this.setState({isOpen: false})}
-                    onOpened={() => console.log('onOpen')}
-                    backdropPressToClose={true}
-                    onClosingState={() => this.setState({isOpen: false})}>
-                    <KeyboardAvoidingView behavior="padding">
-                        <Text text={'Thêm thông tin cho đơn hàng'}
-                              color={global.colorF3}
-                              fontFamily={global.fontBold}
-                              size={global.sizeP20}
-                              style={{textAlign: 'center', marginBottom: 20}}/>
-
-                        <TextInput
-                            value={this.state.numPhone}
-                            onChangeText={input => this.setState({numPhone: input})}
-                            nameIcon={'ios-call-outline'}
-                            placeholder={'Hãy để lại số điện thoại của bạn'}
-                            warning={true}
-                            keyboardType={'numeric'}
-                            maxLength={11}
-                            returnKeyType={'done'}/>
-                        <TextInput
-                            value={this.state.note}
-                            onChangeText={input => this.setState({note: input})}
-                            nameIcon={'ios-clipboard-outline'}
-                            placeholder={'Ghi chú khác'}
-                            multiline={true}
-                            style={{textAlignVertical: "top"}}
-                            maxLength={100}
-                            returnKeyType={'done'}
-                            returnKeyLabel={'Done'}
-                            keyboardType={'email-address'}
-                            numberOfLines={4}/>
-                        <View style={{flexDirection: 'row'}}>
-                            <ButtonWithIcon
-                                onClick={() => this.setState({isOpen: false})}
-                                buttonText={'Tiếp tục mua hàng'}
-                                style={{
-                                    margin: 5,
-                                    //width: (width / 2) - 100,
-                                    height: 40,
-                                    backgroundColor: global.colorF3,
-                                    borderRadius: 20,
-                                    //alignSelf: 'center',
-                                    flex: 1,
-                                    alignItems: 'center',
-                                    justifyContent: 'center'
-                                }}
-                                styleText={{
-                                    color: global.colorTextPrimary,
-                                    fontSize: global.sizeP14,
-                                    fontFamily: global.fontBold,
-                                    alignSelf: 'center',
-                                    textDecorationLine: 'underline',
-                                    textAlign: 'center'
-                                }}
-                            />
-                            <ButtonWithIcon
-                                onClick={() => this.props.uploadCartItem(this.props.dataCart, this.props.userInfo.uid)}
-                                buttonText={'Gửi đơn hàng'}
-                                style={{
-                                    margin: 5,
-                                    //width: (width / 2) - 100,
-                                    height: 40,
-                                    backgroundColor: global.red,
-                                    borderRadius: 20,
-                                    flex: 1,
-                                    //alignSelf: 'center',
-                                    alignItems: 'center',
-                                    justifyContent: 'center'
-                                }}
-                                styleText={{
-                                    color: global.colorFF,
-                                    fontSize: global.sizeP14,
-                                    fontFamily: global.fontBold,
-                                    alignSelf: 'center',
-                                    textDecorationLine: 'underline',
-                                    textAlign: 'center'
-                                }}
-                            />
-                        </View>
-                    </KeyboardAvoidingView>
-                </ModalBox>
+                <ModalOderView
+                    {...this.props}
+                    ref={'modalOder'}
+                    styleModalPopupCustom={{backgroundColor:global.colorTextPrimary}}
+                />
             </View>
         );
     }
@@ -193,8 +96,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        addItemToCart: items => dispatch(ACTION.addItemToCart(items)),
-        uploadCartItem: (items,uid) => dispatch(ACTION.updateLoadCartProduct(items,uid))
+        cartAction: bindActionCreators(cartAction, dispatch),
     };
 }
 

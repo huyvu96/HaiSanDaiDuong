@@ -6,7 +6,6 @@ import Header from '../../modules/Header/index';
 import IconButton from '../../Components/Button/IconButton';
 import global from "../../Styles/global";
 import RoundAvatar from "../../Components/Avatar/RoundAvatar";
-import WrapperView from "../../Components/Wrapper/WrapperView";
 import * as ACTION from "../../Redux/ActionCreator/cartActionCreator";
 import {connect} from "react-redux";
 
@@ -57,7 +56,6 @@ class Account extends Component {
                                  top: 245 - 80 / 2,
                                  right: width / 2 - 45
                              }}/>
-                <WrapperView data={this.props.dataCart} heading={'Lịch sử đặt hàng'}/>
             </View>
         );
     }
