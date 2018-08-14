@@ -26,7 +26,6 @@ class Account extends Component {
             phoneNumber,
             sex
         } = this.props.userInfo;
-        console.log(this.props.userInfo);
         return (
             <View style={styles.container}>
                 <Header
@@ -49,6 +48,7 @@ class Account extends Component {
                 />
                 <RoundAvatar uriImage={photoURL}
                              avatarStyle={styles.round_avatar}/>
+
             </View>
         );
     }
