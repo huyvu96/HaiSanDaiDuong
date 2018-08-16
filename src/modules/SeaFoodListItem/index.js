@@ -11,12 +11,12 @@ const {height, width} = Dimensions.get('window');
 class SeaFoodListItem extends Component {
     state = {
         animation: new Animated.Value(0)
-    }
+    };
 
     componentWillMount() {
         Animated.timing(this.state.animation, {
             toValue: 1,
-            duration: 500,
+            duration: 300,
             delay: this.props.index * 400
         }).start();
     }
@@ -30,7 +30,7 @@ class SeaFoodListItem extends Component {
                         {
                             translateY: this.state.animation.interpolate({
                                 inputRange: [0, 1],
-                                outputRange: [700, 1]
+                                outputRange: [400, 1]
                             })
                         }
                     ]

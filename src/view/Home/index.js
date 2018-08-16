@@ -120,7 +120,7 @@ class Home extends Component {
                     onIndexChange={this._handleIndexChange}
                 />
                 {
-                    !this.state.openPhone ? (!this.state.onScrolling ? <FloatingButton nameIcon='ios-call' onPress={() => {
+                    !this.state.openPhone ? (!this.state.onScrolling ? <FloatingButton nameIcon='ios-call' onClick={() => {
                         this.setState({openPhone: true})
                     }}/> : null):(null)
                 }

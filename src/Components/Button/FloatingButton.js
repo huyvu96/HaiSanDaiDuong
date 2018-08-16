@@ -10,22 +10,22 @@ const FloatingButton = ({nameIcon,icoStyle,btnStyle,onClick})=>{
         flex:1,
         alignItems:'center',
         justifyContent:'center'
-    }
+    };
     let floatingButton = {
         position: 'absolute',
         width:60,height:60,
         backgroundColor: global.colorTextPrimary,
-        bottom:30,right:30,
+        bottom:20,right:20,
         borderRadius: 30,
         alignItems:'center',
         justifyContent:'center',
         elevation: 2
-    }
+    };
     let iconStyle = {
         fontSize: height / 20,
         color: 'white',
         alignSelf:'center' 
-    }
+    };
     return (
         <TouchableNativeFeedback onPress ={onClick}>
             <View style = {[floatingButton,btnStyle]}>
@@ -33,7 +33,7 @@ const FloatingButton = ({nameIcon,icoStyle,btnStyle,onClick})=>{
             </View>
         </TouchableNativeFeedback>
 );
-}
+};
 
 FloatingButton.propTypes = {
     nameIcon: PropTypes.string,

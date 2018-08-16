@@ -26,23 +26,23 @@ const TabBar = createBottomTabNavigator({
                 let iconName;
                 switch (routeName) {
                     case 'Home':
-                        iconName = (<Ionicons name="md-home" style={{fontSize: 35, color: tintColor}}/>);
+                        iconName = "md-home";
                         break;
                     case 'Discover':
-                        iconName = (<Ionicons name="md-globe" style={{fontSize: 35, color: tintColor}}/>);
+                        iconName = "md-globe";
                         break;
                     case 'Notification':
-                        iconName = (<Ionicons name="md-notifications" style={{fontSize: 35, color: tintColor}}/>);
+                        iconName = "md-notifications";
                         break;
                     case 'Account':
-                        iconName = (<Ionicons name="md-contact" style={{fontSize: 35, color: tintColor}}/>);
+                        iconName = "md-contact";
                         break;
                 }
-                return iconName;
+                return <Ionicons name={iconName} style={{fontSize: height/18, color: tintColor}}/>;
             },
         }),
         initialRouteName: 'Home',
-        lazyLoad: false,
+        lazyLoad: true,
         swipeEnabled: false,
         animationEnabled: false,
         tabBarPosition: 'bottom',

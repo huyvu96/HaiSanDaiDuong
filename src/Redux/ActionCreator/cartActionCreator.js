@@ -1,5 +1,6 @@
 import * as NAME_ACTION from '../Constants/actionTypes';
 import cartService from '../../services/serviceCart';
+import loginService from "../../services/serviceLogin";
 
 export function addItemToCart() {
     return {
@@ -92,13 +93,14 @@ export function getDataProduct() {
     }
 }
 
-export function updateLoadCartProduct(data,uid){
+export function updateLoadCartProduct(params){
     return async (dispatch) =>{
-        console.log('vao roi', data);
         await dispatch(uploadDataCartProductLoading());
-        if(data){
-            console.log('vao roi 2');
-            await cartService.saveProductCart(data,uid);
+        if(params){
+            let newData = {...params.data, phoneNumber: params.numPhone, note: params.note};
+            console.log(newData);
+            await cartService.saveProductCart(newData,params.uid);
+            await loginService.updateUserInfo(params.uid, params.numPhone);
             dispatch(uploadDataCartProductSucess());
         } else {
             dispatch(uploadDataCartProductFail());

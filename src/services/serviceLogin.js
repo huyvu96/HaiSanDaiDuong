@@ -13,6 +13,8 @@ class loginService {
                 callback(false)
         })
     }
-
+    static async updateUserInfo(uid,phoneNumber){
+        await firebase.database().ref().child(`User/${uid}/phoneNumber`).set(phoneNumber)
+    }
 }
 module.exports = loginService;
