@@ -97,7 +97,7 @@ export function updateLoadCartProduct(params){
     return async (dispatch) =>{
         await dispatch(uploadDataCartProductLoading());
         if(params){
-            let newData = {...params,productCash: params.data, phoneNumber: params.numPhone, note: params.note};
+            let newData = {productCash: params.data, phoneNumber: params.numPhone, note: params.note};
             console.log(newData);
             await cartService.saveProductCart(newData,params.uid);
             await loginService.updateUserInfo(params.uid, params.numPhone);

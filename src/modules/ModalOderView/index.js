@@ -5,7 +5,6 @@ import Text from "../../Components/Text/Text";
 import ButtonWithIcon from "../../Components/Button/ButtonWithIcon";
 import global from "../../Styles/global";
 import TextInput from '../../Components/TextInput/TextSingleInput';
-import login from '../../services/serviceLogin';
 
 const {height, width} = Dimensions.get("window");
 export default class ModalOderView extends ModalOder {
@@ -27,7 +26,6 @@ export default class ModalOderView extends ModalOder {
         this.setState({
             numPhone: params.numPhone,
             note: params.note,
-            warning: false
         });
         super.openModal();
     }
