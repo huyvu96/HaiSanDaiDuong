@@ -6,7 +6,7 @@ import Header from '../../modules/Header/index';
 import IconButton from '../../Components/Button/IconButton';
 import global from "../../Styles/global";
 import {FlatList, Dimensions,} from 'react-native';
-import OrderItem from '../../modules/OrderHistory';
+import OrderHistoryListView from '../../modules/OrderHistoryListView/index';
 const data = [{
   id:'a1',
   time: '232323',
@@ -58,16 +58,6 @@ class History extends Component {
 
       };
     }
-    _renderItem = ({item})=>{
-      return(
-        <OrderItem
-          id={item.id}
-          time={item.time}
-          total={item.total}
-          data={item.product}
-        />
-      );
-    }
     render() {
       return (
         <View style={styles.container}>
@@ -83,13 +73,10 @@ class History extends Component {
               rightHeader={
               <IconButton nameIcon ='md-list' iconStyle ={styles.icon} />}
             />
-            <FlatList
-                data={data}
-                removeClippedSubviews={true}
-                extraData={this.props}
-                showsVerticalScrollIndicator={false}
-                renderItem={this._renderItem}
-                keyExtractor={(item) => item.id} />
+           <OrderHistoryListView
+              data={data}
+           />
+
         </View>
       );
     }
