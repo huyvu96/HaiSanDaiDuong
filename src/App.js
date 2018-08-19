@@ -68,10 +68,11 @@ const TabBar = createBottomTabNavigator({
 const RootNavigator = createStackNavigator({
         TabBar: {screen: TabBar},
         Login: {screen: Login},
-        Cart: {screen: Cart}
+        Cart: {screen: Cart},
+        History:{screen:History},
     },
     {
-        initialRouteName: "Login",
+        initialRouteName: "History",
         headerMode: "none",
     }
 );
@@ -79,7 +80,6 @@ export default class App extends Component {
     constructor(props) {
         super(props);
     }
-
     render() {
         return (
             <Provider store={store}>

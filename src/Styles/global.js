@@ -37,6 +37,7 @@ export default  {
     orange: '#E67E22',
     red: '#E74C3C',
     grey: '#95A5A6',
+    black:'#000000',
   // for Registration
     color66: '#666666',
     colorF4: '#f4f4f4',

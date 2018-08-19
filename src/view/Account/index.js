@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import {View, Dimensions, Image} from 'react-native';
 import styles from './styles';
