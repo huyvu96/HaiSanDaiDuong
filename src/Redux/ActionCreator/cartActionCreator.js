@@ -1,6 +1,7 @@
 import * as NAME_ACTION from '../Constants/actionTypes';
 import cartService from '../../services/serviceCart';
 import loginService from "../../services/serviceLogin";
+import * as LOGIN_ACTION from './actionLoginCreators';
 
 export function addItemToCart() {
     return {
@@ -93,13 +94,19 @@ export function getDataProduct() {
     }
 }
 
-export function updateLoadCartProduct(params){
-    return async (dispatch) =>{
+export function updateLoadCartProduct(params) {
+    return async (dispatch) => {
         await dispatch(uploadDataCartProductLoading());
-        if(params){
-            let newData = {productCash: params.data, phoneNumber: params.numPhone, note: params.note};
-            console.log(newData);
-            await cartService.saveProductCart(newData,params.uid);
+        if (params) {
+            let newData = {
+                productCash: params.data,
+                phoneNumber: params.numPhone,
+                note: params.note,
+                total: params.total,
+                timeIn: params.timeIn
+            };
+            await cartService.saveProductCart(newData, params.uid);
+            await LOGIN_ACTION.updateUserInfo(params.numPhone, null);
             await loginService.updateUserInfo(params.uid, params.numPhone);
             dispatch(uploadDataCartProductSucess());
         } else {

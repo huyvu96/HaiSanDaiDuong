@@ -16,3 +16,8 @@ export function userLoading() {
         type: NAME_ACTION.USER_LOADING
     }
 }
+export function updateUserInfo(phoneNumber, sex) {
+    return {
+        type: NAME_ACTION.USER_LOADING, phoneNumber,sex
+    }
+}

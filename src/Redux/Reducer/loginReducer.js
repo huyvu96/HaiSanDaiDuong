@@ -10,6 +10,8 @@ export default function loginReducer(state = defaultState, action){
             return {...state, userInfo: action.userInfo, isLoadingLogin: false,};
         case NAME_ACTION.USER_LOADING:
             return {...state, isLoadingLogin: true};
+        case NAME_ACTION.UPDATE_USERINFO:
+            return {...state, userInfo: {...state.userInfo, phoneNumber: action.phoneNumber || "Chưa cập nhật", sex: action.sex || "Chưa cập nhật"}};
         default: return state;
     }
 }

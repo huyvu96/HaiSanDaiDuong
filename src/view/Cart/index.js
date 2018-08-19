@@ -19,9 +19,6 @@ class Cart extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isOpen: false,
-            numPhone: '',
-            note: ''
         };
         this._onRemove = this._onRemove.bind(this);
     }
@@ -79,7 +76,10 @@ class Cart extends Component {
                     onRemove={this._onRemove}/>
                 <View style={styles.view_list_card}>
                     <ButtonWithIcon buttonText={this.props.dataCart.length === 0 ? 'Giỏ hàng trống' : 'Đặt hàng ngay'}
-                                    onClick={() => (this.props.dataCart.length === 0 ? console.log('onClick') : this.refs.modalOder.openModal({phone: this.state.numPhone, note: this.state.note}))}/>
+                                    onClick={() => (this.props.dataCart.length === 0 ? null : this.refs.modalOder.openModal({
+                                        numPhone: this.props.userInfo.phoneNumber,
+                                        total: Currency.convertNumberToCurrency(this.props.total)
+                                    }))}/>
                 </View>
                 <ModalOderView
                     {...this.props}
