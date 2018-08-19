@@ -1,6 +1,6 @@
 
 import React, {Component} from 'react';
-import {View, Dimensions, Image} from 'react-native';
+import {View, Dimensions, Image,Alert} from 'react-native';
 import styles from './styles';
 import Text from '../../Components/Text/Text';
 import Header from '../../modules/Header/index';
@@ -17,7 +17,10 @@ class Account extends Component {
         super(props);
         this.state = {};
     }
-
+    orderHistory(){
+        //this.props.navigation.navigate('History');
+        Alert.alert("I lovve yoou react native")
+    }
     render() {
         const {
             displayName,
@@ -40,7 +43,7 @@ class Account extends Component {
                         fontFamily={global.fontLight}
                         bold={global.fontWeightDark}/>}
                     rightHeader={
-                        <IconButton nameIcon='ios-settings' iconStyle={styles.icon}/>}
+                        <IconButton nameIcon='ios-settings' iconStyle={styles.icon}  onClick={() => this.props.navigation.navigate('History')}/>}
                 />
                 <Image source={{uri: photoURL}}
                        resizeMode={Image.resizeMode.cover}

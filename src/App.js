@@ -5,13 +5,13 @@ import {Provider} from 'react-redux'
 import {createStackNavigator, createBottomTabNavigator} from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Home from './view/Home';
-import History from './view/History';
 import Account from './view/Account';
 import Login from './view/Login';
 import Cart from './view/Cart';
 import global from './Styles/global';
 import Notification from "./view/Notification";
 import Discover from "./view/Discover";
+import History from './view/History'
 
 const {height, width} = Dimensions.get('window');
 const TabBar = createBottomTabNavigator({
@@ -72,7 +72,7 @@ const RootNavigator = createStackNavigator({
         History:{screen:History},
     },
     {
-        initialRouteName: "History",
+        initialRouteName: "Login",
         headerMode: "none",
     }
 );
