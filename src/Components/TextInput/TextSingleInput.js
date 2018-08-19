@@ -50,7 +50,7 @@ const TextSingleInput = ({numberOfLines,returnKeyLabel,maxLength,nameIcon,multil
             </View>
             {
                 warning ? <View style={styles.footerWarningWrapper}>
-                    <TextComponent text={'Vui lòng điền đầy đủ thông tin'} style={styles.textFooterWarning}/>
+                    <TextComponent text={'Số điện thoại không đúng'} style={styles.textFooterWarning}/>
                 </View> : <View style={{height:20}}/>
             }
         </View>

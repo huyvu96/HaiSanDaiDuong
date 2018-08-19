@@ -1,10 +1,11 @@
 import React, {Commponent} from "react";
-import {View, TouchableOpacity, Dimensions, Platform, Image, LayoutAnimation} from "react-native";
+import {View, TouchableOpacity, Dimensions, Platform, Image, LayoutAnimation, Alert} from "react-native";
 import ModalOder from '../../Components/Modal/ModalOder'
 import Text from "../../Components/Text/Text";
 import ButtonWithIcon from "../../Components/Button/ButtonWithIcon";
 import global from "../../Styles/global";
 import TextInput from '../../Components/TextInput/TextSingleInput';
+import moment from 'moment';
 
 const {height, width} = Dimensions.get("window");
 export default class ModalOderView extends ModalOder {
@@ -15,6 +16,7 @@ export default class ModalOderView extends ModalOder {
             animationDuration: 150,
             numPhone: '',
             note: '',
+            total:'',
             warning: false
         };
         this.openModal = this.openModal.bind(this);
@@ -25,7 +27,7 @@ export default class ModalOderView extends ModalOder {
     openModal(params) {
         this.setState({
             numPhone: params.numPhone,
-            note: params.note,
+            total: params.total
         });
         super.openModal();
     }
@@ -34,16 +36,34 @@ export default class ModalOderView extends ModalOder {
         this.setState({
             warning: false
         });
-        super.onCloseModal();
+        this.props.navigation.goBack();
+        this.closeModal();
     }
-
+    _onUpdate(item) {
+        Alert.alert(
+            null,
+            'Bạn có muốn xoá sản phẩm này ?',
+            [
+                {text: 'Không', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                {
+                    text: 'Có', onPress: () => {
+                        this.props.cartAction.deleteItemCheck(item.id)
+                    }
+                },
+            ],
+            {cancelable: false}
+        )
+    }
     onAddCartToSever() {
-        if (this.state.numPhone) {
+        const{numPhone} = this.state;
+        if (numPhone && numPhone.length >=10) {
             let data ={
                 data :this.props.dataCart,
                 uid: this.props.userInfo.uid,
-                numPhone:this.state.numPhone,
-                note:this.state.note
+                numPhone: numPhone,
+                note:this.state.note,
+                timeIn: moment(new Date()).format("DD/MM/YYYY hh:mm:ss"),
+                total: this.state.total
             };
             this.props.cartAction.updateLoadCartProduct(data);
             this.onCloseModal();
