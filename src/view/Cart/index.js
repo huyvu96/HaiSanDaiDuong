@@ -18,8 +18,7 @@ const {height, width} = Dimensions.get('window');
 class Cart extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-        };
+        this.state = {};
         this._onRemove = this._onRemove.bind(this);
     }
 
@@ -66,7 +65,7 @@ class Cart extends Component {
                           fontFamily={global.fontRegular}
                           size={global.sizeP18}/>
                     <Text
-                        text={(this.props.total !== '' ? Currency.convertNumberToCurrency(this.props.total) : '0') + ' VNĐ'}
+                        text={(this.props.total && this.props.total !== '' ? Currency.convertNumberToCurrency(this.props.total) : '0') + ' VNĐ'}
                         color={global.red}
                         fontFamily={global.fontRegularItalic}
                         size={global.sizeP18}/>

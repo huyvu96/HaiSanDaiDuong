@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {View, StatusBar, Dimensions} from 'react-native';
-import store from './Redux/Store/configStore'
+import configureStore from './Redux/Store/configStore'
+import { PersistGate } from 'redux-persist/lib/integration/react';
 import {Provider} from 'react-redux'
 import {createStackNavigator, createBottomTabNavigator} from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -12,6 +13,7 @@ import global from './Styles/global';
 import Notification from "./view/Notification";
 import Discover from "./view/Discover";
 import History from './view/History'
+const { persistor, store } = configureStore();
 
 const {height, width} = Dimensions.get('window');
 const TabBar = createBottomTabNavigator({
@@ -83,13 +85,15 @@ export default class App extends Component {
     render() {
         return (
             <Provider store={store}>
+                <PersistGate loading={null} persistor={persistor}>
                 <View style={{flex: 1}}>
-                    <StatusBar
-                        backgroundColor="#2980b9"
-                        translucent={false}
-                    />
-                    <RootNavigator/>
-                </View>
+                        <StatusBar
+                            backgroundColor="#2980b9"
+                            translucent={false}
+                        />
+                        <RootNavigator/>
+                    </View>
+                </PersistGate>
             </Provider>
         );
     }

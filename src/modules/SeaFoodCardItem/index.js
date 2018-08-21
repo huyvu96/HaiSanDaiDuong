@@ -7,6 +7,7 @@ import global from '../../Styles/global';
 import TextComponent from "../../Components/Text/Text";
 import ButtonWithIcon from "../../Components/Button/ButtonWithIcon";
 import IconButton from "../../Components/Button/IconButton";
+import FastImage from 'react-native-fast-image'
 
 const {height, width} = Dimensions.get('window');
 
@@ -37,7 +38,8 @@ class SeaFoodItem extends Component {
                     ]
                 }]}>
 
-                    <Image source={{uri: uriImage}} style={styles.imageItem}/>
+                    <FastImage  resizeMode={FastImage.resizeMode.cover}
+                                source={{uri: uriImage}} style={styles.imageItem}/>
                     {/* <LinearGradient colors={['rgba(0,0,0, 0)', 'rgba(0, 0, 0, 0)', 'rgba(0,0,0, 0.2)']}
                                     style={styles.imageItemLinear}/> */}
                     <View style ={styles.viewText}>

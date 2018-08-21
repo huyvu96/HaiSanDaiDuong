@@ -1,6 +1,5 @@
-
 import React, {Component} from 'react';
-import {View, Dimensions, Image,Alert} from 'react-native';
+import {View, Dimensions, Image, Alert} from 'react-native';
 import styles from './styles';
 import Text from '../../Components/Text/Text';
 import Header from '../../modules/Header/index';
@@ -9,6 +8,7 @@ import global from "../../Styles/global";
 import RoundAvatar from "../../Components/Avatar/RoundAvatar";
 import * as ACTION from "../../Redux/ActionCreator/cartActionCreator";
 import {connect} from "react-redux";
+import FastImage from 'react-native-fast-image'
 
 const {width} = Dimensions.get('window');
 
@@ -17,10 +17,12 @@ class Account extends Component {
         super(props);
         this.state = {};
     }
-    orderHistory(){
+
+    orderHistory() {
         //this.props.navigation.navigate('History');
         Alert.alert("I lovve yoou react native")
     }
+
     render() {
         const {
             displayName,
@@ -43,12 +45,13 @@ class Account extends Component {
                         fontFamily={global.fontLight}
                         bold={global.fontWeightDark}/>}
                     rightHeader={
-                        <IconButton nameIcon='ios-settings' iconStyle={styles.icon}  onClick={() => this.props.navigation.navigate('History')}/>}
+                        <IconButton nameIcon='ios-settings' iconStyle={styles.icon}
+                                    onClick={() => this.props.navigation.navigate('History')}/>}
                 />
-                <Image source={{uri: photoURL}}
-                       resizeMode={Image.resizeMode.cover}
-                       blurRadius={0.5}
-                       style={styles.image}
+                <FastImage source={{uri: photoURL}}
+                           blurRadius={0.5}
+                           resizeMode={FastImage.resizeMode.cover}
+                           style={styles.image}
                 />
                 <RoundAvatar uriImage={photoURL}
                              avatarStyle={styles.round_avatar}/>

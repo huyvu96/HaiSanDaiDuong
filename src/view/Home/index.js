@@ -158,6 +158,7 @@ class Home extends Component {
 }
 function mapStateToProps(state) {
     return {
+        userInfo:state.login.userInfo,
         dataCart: state.cart.dataCart,
         dataShop: state.cart.dataShop
     };

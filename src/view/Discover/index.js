@@ -68,7 +68,7 @@ class Discover extends Component {
                                 {
                                     data.map((e, i) => {
                                         return <View key={i}>
-                                            <Image resizeMode={Image.resizeMode.cover}
+                                            <Image
                                                    source={{uri: e}}
                                                    style={styles.swipeImage}/>
                                             <LinearGradient

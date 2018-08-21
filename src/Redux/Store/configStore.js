@@ -2,5 +2,19 @@
 import {compose, createStore, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk';
 import rootReducer from '../Reducer'
-const store = createStore(rootReducer, applyMiddleware(thunk));
-export default store;
+import { AsyncStorage } from 'react-native'
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { persistStore, persistReducer } from 'redux-persist'
+const persistConfig = {
+    key: 'root',
+    storage: AsyncStorage,
+    whitelist: ['login']
+};
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+export default function configureStore(){
+    const store = createStore(persistedReducer, compose(
+        applyMiddleware(thunk)));
+    const persistor = persistStore(store);
+    return { persistor, store };
+};
+
