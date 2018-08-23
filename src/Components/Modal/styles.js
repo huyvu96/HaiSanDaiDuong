@@ -20,4 +20,17 @@ export default StyleSheet.create({
         alignSelf: 'center',
         justifyContent: 'center',
     },
+    // modalCall
+    ModalContact: {
+        borderRadius: 6,
+        backgroundColor: 'white',
+        marginLeft: 10,
+        marginRight: 10,
+        paddingTop: 24,
+        paddingBottom: 24,
+        paddingLeft: width >= 375 ? 20 : 14,
+        paddingRight: width >= 375 ? 20 : 14,
+        alignSelf: 'center',
+        justifyContent: 'center',
+    },
 });
