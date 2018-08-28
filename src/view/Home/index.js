@@ -15,7 +15,11 @@ import FloatingButton from '../../Components/Button/FloatingButton';
 import * as NAME_ACTION from '../../Redux/Constants/actionTypes';
 import * as ACTION from '../../Redux/ActionCreator/cartActionCreator';
 import {connect} from "react-redux";
-
+import call from "react-native-phone-call";
+const args = {
+    number: '0888890011', // String value with the number to call
+    prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call 
+}
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -123,7 +127,8 @@ class Home extends Component {
                 {
                     !this.state.openPhone ? (!this.state.onScrolling ? <FloatingButton nameIcon='ios-call' onClick={() => {
                         //this.setState({openPhone: true})
-                       this.modalContact.openModal({})
+                      // this.modalContact.openModal({})
+                      call(args).catch(console.error)
                     }}/> : null):(null)
                 }
                 {/* <ModalBox
@@ -153,11 +158,11 @@ class Home extends Component {
                         styleText={styles.btn_with_icon_text}
                     />
                 </ModalBox> */}
-                  <ModalContactView
+                  {/* <ModalContactView
                     {...this.props}
                     ref={ref =>this.modalContact = ref}
-                    styleModalPopupCustom={{backgroundColor: global.colorTextPrimary}}
-                />
+                    styleModalPopupCustom={{}}
+                /> */}
             </View>
         );
     }

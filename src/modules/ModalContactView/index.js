@@ -7,6 +7,7 @@ import global from "../../Styles/global";
 import TextInput from '../../Components/TextInput/TextSingleInput';
 import moment from 'moment';
 import call from "react-native-phone-call";
+import RoundAvatar from "../../Components/Avatar/RoundAvatar";
 
 const args = {
     number: '0934197445', // String value with the number to call
@@ -46,12 +47,10 @@ export default class ModalContactView extends ModalContact {
     }
     renderHeader() {
         return (
-            <View>
-                <Text text={'Hải Sản Đại Dương'}
-                      color={global.colorF3}
-                      fontFamily={global.fontBold}
-                      size={global.sizeP20}
-                      style={{textAlign: 'center', marginBottom: 20}}/>
+            <View style={{alignItems:'center',height:80}}>
+               <RoundAvatar
+                            uriImage={'https://scontent.fsgn5-1.fna.fbcdn.net/v/t31.0-8/28947677_2062594664016900_292927065248317668_o.jpg?_nc_cat=0&oh=775d76fd07b115764f1f664753d00866&oe=5BE4B82F'}
+                            avatarStyle={{height: 80, width: 80,borderRadius:40,position:'absolute'}}/>
             </View>
         );
     }
