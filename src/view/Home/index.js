@@ -10,11 +10,16 @@ import Header from '../../modules/Header/index';
 import IconButton from '../../Components/Button/IconButton';
 import ModalBox from 'react-native-modalbox';
 import ButtonWithIcon from '../../Components/Button/ButtonWithIcon';
+import ModalContactView from '../../modules/ModalContactView'
 import FloatingButton from '../../Components/Button/FloatingButton';
 import * as NAME_ACTION from '../../Redux/Constants/actionTypes';
 import * as ACTION from '../../Redux/ActionCreator/cartActionCreator';
 import {connect} from "react-redux";
-
+import call from "react-native-phone-call";
+const args = {
+    number: '0888890011', // String value with the number to call
+    prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call 
+}
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -122,13 +127,15 @@ class Home extends Component {
                 />
                 {
                     !this.state.openPhone ? (!this.state.onScrolling ? <FloatingButton nameIcon='ios-call' onClick={() => {
-                        this.setState({openPhone: true})
+                        //this.setState({openPhone: true})
+                      // this.modalContact.openModal({})
+                      call(args).catch(console.error)
                     }}/> : null):(null)
                 }
-                <ModalBox
+                {/* <ModalBox
                     style={styles.modalbox}
                     isOpen={this.state.openPhone}
-                    animationDuration ={0}
+                    animationDuration ={1}
                     swipeToClose={false}
                     position='center'
                     onClosed={() => this.setState({openPhone: false})}
@@ -151,8 +158,12 @@ class Home extends Component {
                         style={styles.btn_with_icon}
                         styleText={styles.btn_with_icon_text}
                     />
-                </ModalBox>
-
+                </ModalBox> */}
+                  {/* <ModalContactView
+                    {...this.props}
+                    ref={ref =>this.modalContact = ref}
+                    styleModalPopupCustom={{}}
+                /> */}
             </View>
         );
     }

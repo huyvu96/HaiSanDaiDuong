@@ -5,7 +5,7 @@ import Modal from "./Modal";
 import PropTypes from "prop-types";
 import styles from "./styles";
 
-export default class ModalOder extends Modal {
+export default class ModalContact extends Modal {
 
     constructor(props) {
         super(props);
@@ -27,7 +27,7 @@ export default class ModalOder extends Modal {
 
     renderPopup() {
         return (
-            <View style={[styles.modalOder,this.props.styleModalPopupCustom]}>
+            <View style={[styles.ModalContact,this.props.styleModalPopupCustom]}>
                 {this.renderHeader()}
                 {this.renderContent()}
                 {this.renderBottom()}
@@ -40,9 +40,9 @@ export default class ModalOder extends Modal {
     }
 }
 
-ModalOder.defaultProps = {
+ModalContact.defaultProps = {
 };
 
-ModalOder.propTypes = {
+ModalContact.propTypes = {
     styleModalPopupCustom: PropTypes.oneOfType([PropTypes.number,PropTypes.object,PropTypes.array]),
 };
