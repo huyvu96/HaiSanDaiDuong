@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {View, StatusBar, Dimensions} from 'react-native';
+import {View, StatusBar, Dimensions, Platform} from 'react-native';
 import configureStore from './Redux/Store/configStore'
-import { PersistGate } from 'redux-persist/lib/integration/react';
+import {PersistGate} from 'redux-persist/lib/integration/react';
 import {Provider} from 'react-redux'
 import {createStackNavigator, createBottomTabNavigator} from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -13,13 +13,14 @@ import global from './Styles/global';
 import Notification from "./view/Notification";
 import Discover from "./view/Discover";
 import History from './view/History'
-const { persistor, store } = configureStore();
+
+const {persistor, store} = configureStore();
+const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
 
 const {height, width} = Dimensions.get('window');
 const TabBar = createBottomTabNavigator({
         Home: Home,
         Discover: Discover,
-        Notification: Notification,
         Account: Account
     }, {
         navigationOptions: ({navigation}) => ({
@@ -33,14 +34,11 @@ const TabBar = createBottomTabNavigator({
                     case 'Discover':
                         iconName = "md-globe";
                         break;
-                    case 'Notification':
-                        iconName = "md-notifications";
-                        break;
                     case 'Account':
                         iconName = "md-contact";
                         break;
                 }
-                return <Ionicons name={iconName} style={{fontSize: height/18, color: tintColor}}/>;
+                return <Ionicons name={iconName} style={{fontSize: height / 18, color: tintColor}}/>;
             },
         }),
         initialRouteName: 'Home',
@@ -71,7 +69,7 @@ const RootNavigator = createStackNavigator({
         TabBar: {screen: TabBar},
         Login: {screen: Login},
         Cart: {screen: Cart},
-        History:{screen:History},
+        History: {screen: History},
     },
     {
         initialRouteName: "Login",
@@ -82,15 +80,15 @@ export default class App extends Component {
     constructor(props) {
         super(props);
     }
+
     render() {
         return (
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
-                <View style={{flex: 1}}>
-                        <StatusBar
-                            backgroundColor="#2980b9"
-                            translucent={false}
-                        />
+                    <View style={{flex: 1}}>
+                        <View style={{height: STATUSBAR_HEIGHT, backgroundColor: "#2980b9"}}>
+                            <StatusBar backgroundColor="#2980b9"/>
+                        </View>
                         <RootNavigator/>
                     </View>
                 </PersistGate>

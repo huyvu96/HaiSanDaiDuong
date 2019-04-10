@@ -102,15 +102,16 @@ class Home extends Component {
             <View style={styles.container}>
                 <Header
                     customHeaderStyle={{backgroundColor: global.colorTextPrimary}}
-                    leftHeader={<IconButton nameIcon='ios-search' iconStyle={{fontSize: 35, color: global.colorF3}}/>}
+                    leftHeader={<IconButton nameIcon='ios-search' iconStyle={{fontSize: 30, color: global.colorF3}}/>}
                     body={<Text
                         text='Hải Sản Đại Dương'
                         color={global.colorF3}
                         size={global.sizeP20}
-                        fontFamily={global.fontLight}
+                        style={{lineHeight: 22}}
+                        fontFamily={global.fontBold}
                         bold={global.fontWeightDark}/>}
                     rightHeader={
-                        <IconButton badge={this.props.dataCart.length.toString() === '0' ? null :this.props.dataCart.length.toString() } nameIcon='ios-cart' iconStyle={{fontSize: 35, color: global.colorF3}}
+                        <IconButton badge={this.props.dataCart.length.toString() === '0' ? null :this.props.dataCart.length.toString() } nameIcon='ios-cart' iconStyle={{fontSize: 30, color: global.colorF3}}
                                     onClick={() => this.props.navigation.push('Cart')}/>}
                 />
                 <TabItems

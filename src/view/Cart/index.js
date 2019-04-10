@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Dimensions, KeyboardAvoidingView, Keyboard, Alert} from 'react-native';
+import {View, Dimensions, Platform, Keyboard, Alert} from 'react-native';
 import styles from './styles';
 import global from '../../Styles/global';
 import Text from '../../Components/Text/Text';
@@ -14,6 +14,7 @@ import ModalOderView from '../../modules/ModalOderView';
 import Currency from '../../Global/Currency';
 
 const {height, width} = Dimensions.get('window');
+const IS_IOS = Platform.OS === "ios";
 
 class Cart extends Component {
     constructor(props) {
@@ -27,11 +28,11 @@ class Cart extends Component {
             null,
             'Bạn có muốn xoá sản phẩm này ?',
             [
-                {text: 'Không', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                {text: 'Không', onPress: () => console.log('Cancel Pressed'), style: IS_IOS ? 'cancel' : 'negative'},
                 {
                     text: 'Có', onPress: () => {
                         this.props.cartAction.deleteItemCheck(item.id)
-                    }
+                    }, style: IS_IOS ? 'destructive' : 'positive'
                 },
             ],
             {cancelable: false}
@@ -50,14 +51,17 @@ class Cart extends Component {
                         text='Giỏ hàng'
                         color={global.colorF3}
                         size={global.sizeP20}
-                        fontFamily={global.fontLight}
-                        bold={global.fontWeightDark}/>}
-                    rightHeader={<Text
-                        text={this.props.dataCart.length.toString() === '0' ? '0' : this.props.dataCart.length.toString()}
-                        color={global.colorF3}
-                        size={global.sizeP18}
+                        style={{lineHeight: 22}}
                         fontFamily={global.fontBold}
-                        style={styles.right_header}/>}
+                        bold={global.fontWeightDark}/>}
+                    rightHeader={<View style={styles.right_header}>
+                        <Text
+                            text={this.props.dataCart.length.toString() === '0' ? '0' : this.props.dataCart.length.toString()}
+                            color={global.colorF3}
+                            size={global.sizeP18}
+                            fontFamily={global.fontBold}
+                            style={{lineHeight: 20}}/>
+                    </View>}
                 />
                 <View style={styles.view_tamtinh}>
                     <Text text={'Tạm tính: '}

@@ -1,18 +1,8 @@
 import React, {Component} from 'react';
 import {
-    Platform,
-    StyleSheet,
     Text,
     View,
-    LayoutAnimation,
-    FlatList,
-    ScrollView,
-    Dimensions,
-    Image,
-    TouchableNativeFeedback,
-    ImageBackground,
-    TextInput,
-    StatusBar
+    TouchableOpacity
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import PropTypes from "prop-types";
@@ -38,18 +28,18 @@ const ButtonWithIcon = ({nameIcon, icoStyle, style, buttonText, styleText, onCli
         color: 'white'
     };
     return (
-        <TouchableNativeFeedback onPress={onClick}>
+        <TouchableOpacity onPress={onClick}>
             <View style={[buttonStyle, style]}>
                 {!nameIcon ? (null) : (<Icon name={nameIcon} style={[iconStyle, icoStyle]}/>)}
                 <Text style={[textStyle, styleText]}>{buttonText}</Text>
             </View>
-        </TouchableNativeFeedback>
+        </TouchableOpacity>
 
     );
 }
 
 ButtonWithIcon.defaultProps = {
-    name: '',
+    nameIcon: '',
 };
 ButtonWithIcon.propTypes = {
     nameIcon: PropTypes.string,

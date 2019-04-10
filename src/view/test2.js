@@ -1,75 +1,38 @@
 import React, {Component} from 'react';
 import {
+    StatusBar,
+    Keyboard,
     View,
-    Image,
+    Text,
+    Dimensions,
+    StyleSheet,
+    ImageBackground,
     TouchableOpacity,
     Animated,
-    Keyboard,
-    ImageBackground,
-    Dimensions,
-    TextInput,
-    Button
-} from 'react-native';
-import styles from './styles';
-import Text from '../../Components/Text/Text';
-import global from "../../Styles/global";
+    LayoutAnimation,
+    UIManager,
+    KeyboardAvoidingView,
+    Alert,
+    ActivityIndicator
+} from "react-native"
+import PropTypes from 'prop-types'
+import * as Animatable from 'react-native-animatable'
 import Icon from 'react-native-vector-icons/Ionicons'
-import {connect} from 'react-redux';
-import {
-    AccessToken,
-    LoginManager
-} from 'react-native-fbsdk';
 import firebase from 'react-native-firebase';
-import loginService from '../../services/serviceLogin';
-import * as ACTION_LOGIN from "../../Redux/ActionCreator/actionLoginCreators";
-import * as ACTION_CART from "../../Redux/ActionCreator/cartActionCreator";
-import FastImage from 'react-native-fast-image'
-
-import cartService from '../../services/serviceCart';
-import login from "../../Redux/Reducer/loginReducer";
-import * as Animatable from "react-native-animatable";
-import ButtonWithIcon from "../../Components/Button/ButtonWithIcon";
-import IconButton from "../../Components/Button/IconButton";
-import TextComponent from "../../Components/Text/Text";
-
+import IconButton from "../Components/Button/IconButton";
+import ButtonWithIcon from "../Components/Button/ButtonWithIcon";
 const {height, width} = Dimensions.get('window');
 
-class Login extends Component {
+class ScreenLogin extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: null,
-            message: '',
-            codeInput: '',
-            phoneNumber: '+84',
-            isInput: false,
-            confirmResult: null,
-        };
+            isInput: false
+        }
     }
 
     componentWillMount() {
         this.loginHeight = new Animated.Value(130)
-    }
-
-    componentDidMount() {
-        this.unsubscribe = firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                this.setState({user: user.toJSON()});
-            } else {
-                // User has been signed out, reset the state
-                this.setState({
-                    user: null,
-                    message: '',
-                    codeInput: '',
-                    phoneNumber: '+84',
-                    confirmResult: null,
-                });
-            }
-        });
-    }
-
-    componentWillUnmount() {
-        if (this.unsubscribe) this.unsubscribe();
     }
 
     increaseHeightOfLogin = () => {
@@ -82,47 +45,29 @@ class Login extends Component {
             })
         })
     };
-
     decreaseHeightOfLogin = () => {
         Keyboard.dismiss();
         Animated.timing(this.loginHeight, {
             toValue: 130,
             duration: 500
-        }).start(() => {
-            this.setState({
-                isInput: false,
-            })
-        })
+        }).start()
     };
-
-    renderPhoneNumberInput() {
-        const {phoneNumber} = this.state;
-
-        return (
-            <View style={{paddingLeft: width / 3 - 80, paddingTop: 100}}>
-                <TextComponent text={'Hãy nhập số điện thoại của bạn'} size={global.sizeP16}
-                               fontFamily={global.fontRegular}
-                               color={global.colorTextPrimary}/>
-                <TextInput
-                    autoFocus
-                    style={{height: 40, marginTop: 15, marginBottom: 15}}
-                    onChangeText={value => this.setState({phoneNumber: value})}
-                    placeholder={'Phone number ... '}
-                    value={phoneNumber}
-                />
-            </View>
-        );
-    }
 
     render() {
         const headerTextOpacity = this.loginHeight.interpolate({
             inputRange: [130, height],
             outputRange: [1, 0]
-        });
+        })
+        const marginTop = this.loginHeight.interpolate({
+            inputRange: [130, height],
+            outputRange: [20, 100]
+        })
         const headerBackArrowOpacity = this.loginHeight.interpolate({
             inputRange: [130, height],
             outputRange: [0, 1]
-        });
+        })
+        console.log(this.state.isInput)
+
 
         return (
             // View lớn nhất
@@ -136,11 +81,10 @@ class Login extends Component {
                     style={{flex: 1}}
                 >
                     {/* View này là View trên */}
-                    <Animatable.View style={{
+                    <View style={{
                         flex: 1,
                         justifyContent: 'center',
-                        alignSelf: 'center',
-                        opacity: headerTextOpacity
+                        alignSelf: 'center'
                     }}>
                         <Animatable.View
                             animation="zoomIn" interationCount={1}
@@ -149,13 +93,14 @@ class Login extends Component {
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 height: 100,
-                                width: 100,
-                                opacity: headerTextOpacity
+                                width: 100
                             }}>
-                            <TextComponent text={'HSĐD'} size={global.sizeP25} fontFamily={global.fontBold}
-                                           color={global.colorTextPrimary}/>
+                            <Text style={{
+                                fontSize: 26,
+                                fontWeight: 'bold'
+                            }}>iTV</Text>
                         </Animatable.View>
-                    </Animatable.View>
+                    </View>
 
                     {/** BOTTOM HALF **/}
                     <Animatable.View animation="slideInUp" interationCount={1}>
@@ -171,18 +116,16 @@ class Login extends Component {
                                     height: 60,
                                     width: 60,
                                     top: 15,
-                                    left: 10,
+                                    left: 25,
                                     zIndex: 100,
                                     opacity: headerBackArrowOpacity,
                                     backgroundColor: 'transparent'
                                 }}>
-                                <IconButton onClick={() => this.decreaseHeightOfLogin()}
-                                            nameIcon={'md-arrow-back'}
-                                            btnStyle={{
-                                                backgroundColor: global.colorTextPrimary, height: 50,
-                                                width: 50, borderRadius: 30,
-                                            }}
-                                            iconStyle={{color: 'white', fontSize: 30, position: 'relative'}}/>
+                                <TouchableOpacity
+                                    onPress={() => this.decreaseHeightOfLogin()}>
+                                    <Icon name="md-arrow-back"
+                                          style={{color: 'white', fontSize: 30, position: 'relative'}}/>
+                                </TouchableOpacity>
                             </Animated.View>
                             <Animated.View
                                 style={{
@@ -194,7 +137,22 @@ class Login extends Component {
                                 {/* View chính sign in sign up */}
 
                                 <View style={{flex: 1}}>
-                                    {this.renderPhoneNumberInput()}
+                                    {/* <ImageBackground
+              source={{uri:'https://raw.githubusercontent.com/react-native-training/react-native-elements-app/master/assets/images/bg_screen3.jpg'}}
+                                  style={{
+                                      flex: 1,
+                                      height,
+                                      width,
+                                      top: 0,
+                                      left: 0,
+                                      justifyContent: 'center',
+                                      alignItems: 'center'
+                                  }}
+                              >
+                                 
+                              </ImageBackground> */}
+                                    {/*<Login isInput = {this.state.isInput}/>*/}
+
                                 </View>
 
                             </Animated.View>
@@ -208,11 +166,10 @@ class Login extends Component {
                                     marginTop: 25
                                 }}
                             >
-                                <TextComponent numberOfLines={2}
-                                               text={'Hải sản đại dương kính chào !!'}
-                                               size={global.sizeP20}
-                                               fontFamily={global.fontRegular}
-                                               color={global.colorTextPrimary}/>
+                                <Text style={{
+                                    fontSize: 24,
+                                    color: 'black',
+                                }}>You need to sign in with phone</Text>
                             </Animated.View>
                             {/* Button log in facebook */}
                             {/* Biến mất button */}
@@ -223,14 +180,21 @@ class Login extends Component {
                                 }}>
                                 <ButtonWithIcon style={{
                                     height: 50,
-                                    width: width - 30,
-                                    backgroundColor: global.colorTextPrimary,
+                                    width: null,
+                                    backgroundColor: 'transparent',
                                     marginTop: 15,
                                     paddingHorizontal: 25,
-                                    alignSelf:'center'
-                                }}  buttonText={'Khám phá ngay'} styleText={{
-                                    color: global.colorFF,
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    alignSelf: 'center'
+                                }} nameIcon={'ios-call'} icoStyle={{
+                                    fontSize: 30,
+                                    color: 'green',
+                                    alignSelf: 'center'
+                                }} buttonText={'+84 ....'} styleText={{
+                                    color: "#000",
                                     fontSize: 23,
+                                    marginLeft: 20
                                 }} onClick={() => this.increaseHeightOfLogin()}/>
                             </Animated.View>
                         </Animated.View>
@@ -259,27 +223,19 @@ class Login extends Component {
                     <Animated.View
                         style={{
                             position: 'absolute',
-                            height: 45,
-                            width: width / 3,
+                            height: 60,
+                            width: 60,
                             right: 10,
-                            bottom: 10,
+                            bottom: 30,
                             zIndex: 100,
+                            backgroundColor: '#54575e',
                             alignItems: 'center',
                             justifyContent: 'center',
+                            borderRadius: 30,
                             opacity: headerBackArrowOpacity
                         }}>
-                        {
-                            this.state.isInput ? <ButtonWithIcon style={{
-                                height: 45,
-                                width: width / 3 - 15,
-                                backgroundColor: global.colorTextPrimary,
-                                paddingHorizontal: 15,
-                            }} buttonText={'NEXT'} styleText={{
-                                lineHeight: 24, textAlign: 'center',
-                                color: global.colorFF,
-                                fontSize: 23
-                            }} onClick={() => this.props.navigation.navigate('TabBar')}/> : null
-                        }
+                        <IconButton nameIcon="md-arrow-forward" iconStyle={{color: 'white', fontSize: 30}}
+                                    onClick={() => this.decreaseHeightOfLogin()}/>
                     </Animated.View>
                 </ImageBackground>
             </View>
@@ -287,23 +243,23 @@ class Login extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        userInfo: state.login.userInfo,
-        isLoadingLogin: state.login.isLoadingLogin,
-        dataShop: state.cart.dataShop,
-        dataCart: state.cart.dataCart,
-    };
-}
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#ecf0f1',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    welcome: {
+        fontSize: 20,
+        textAlign: 'center',
+        margin: 10,
+    },
+    instructions: {
+        textAlign: 'center',
+        color: '#333333',
+        marginBottom: 5,
+    },
+});
 
-function mapDispatchToProps(dispatch) {
-    return {
-        addUserInfo: users => dispatch(ACTION_LOGIN.userLoaded(users)),
-        userLoginFail: () => dispatch(ACTION_LOGIN.userLoading()),
-        getProduct: () => dispatch(ACTION_CART.getDataProduct())
-    };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
-
-
+export default ScreenLogin

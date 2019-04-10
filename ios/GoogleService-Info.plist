@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>235852435562-utgnao4ft2nho1c5dheoafqpt70ptiek.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.235852435562-utgnao4ft2nho1c5dheoafqpt70ptiek</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>235852435562-nbqv08b409p6fmo8gsp55ffl2mtld6p3.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD5noJzhXiK_NEXduo1Q1_JsI3Jth1n7s4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>235852435562</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.reactjs.native.example.HaiSanDaiDuong</string>
+	<key>PROJECT_ID</key>
+	<string>haisandaiduong-39396</string>
+	<key>STORAGE_BUCKET</key>
+	<string>haisandaiduong-39396.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:235852435562:ios:9f94a47c82b42721</string>
+	<key>DATABASE_URL</key>
+	<string>https://haisandaiduong-39396.firebaseio.com</string>
+</dict>
+</plist>

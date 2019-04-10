@@ -32,8 +32,9 @@ const styles = StyleSheet.create({
     },
     buttonStyle: {
         height: 30,
-        width: '10%',
-        flex: 0.4
+        paddingHorizontal: 20
+        //width: '10%',
+        //flex: 0.4
     },
     textStyle:{
         fontSize: global.sizeP16,

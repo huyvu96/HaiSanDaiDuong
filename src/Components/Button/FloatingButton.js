@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList,StyleSheet,TouchableNativeFeedback,Image,Dimensions } from 'react-native';
+import { View,TouchableOpacity,Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 const { height } = Dimensions.get('window');
 import global from '../../Styles/global'
@@ -27,11 +27,11 @@ const FloatingButton = ({nameIcon,icoStyle,btnStyle,onClick})=>{
         alignSelf:'center' 
     };
     return (
-        <TouchableNativeFeedback onPress ={onClick}>
+        <TouchableOpacity onPress ={onClick}>
             <View style = {[floatingButton,btnStyle]}>
             <Icon name={nameIcon} style={[iconStyle,icoStyle]}/>
             </View>
-        </TouchableNativeFeedback>
+        </TouchableOpacity>
 );
 };
 

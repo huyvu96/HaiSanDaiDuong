@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Dimensions, Image, TouchableWithoutFeedback, Animated} from 'react-native';
+import {View, Dimensions, Image, TouchableOpacity, Animated} from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './styles';
 import global from '../../Styles/global';
@@ -24,7 +24,7 @@ class SeaFoodListItem extends Component {
     render() {
         const {uriImage, title, subText, onClick, onRemove, onChecked} = this.props;
         return (
-            <TouchableWithoutFeedback onPress={onClick}>
+            <TouchableOpacity onPress={onClick}>
                 <Animated.View style={[styles.viewItem, {
                     transform: [
                         {
@@ -58,7 +58,7 @@ class SeaFoodListItem extends Component {
                                     styleText={styles.textStyle}
                     />
                 </Animated.View>
-            </TouchableWithoutFeedback>
+            </TouchableOpacity>
         );
     }
 }

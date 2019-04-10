@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {TouchableNativeFeedback, View} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Ionicons';
 import TextComponent from "../Text/Text";
@@ -12,18 +12,25 @@ const IconButton = ({nameIcon, btnStyle, iconStyle, badge, onClick}) => {
     };
     let badgeStyle = {
         position: 'absolute',
-        top: 0, left: 0, bottom: 0, right: 15,
+        top: 0, left: -10, bottom: 0, right: 0,
         backgroundColor: global.red,
-        borderRadius:10,height:20,width:20,
-        textAlign:'center'
+        borderRadius: 10,
+        height:20,width:20,
+        alignItems: 'center',
+        justifyContent: 'center'
     };
     return (
-        <TouchableNativeFeedback onPress={onClick}>
+        <TouchableOpacity onPress={onClick}>
             <View style={[buttonStyle, btnStyle]}>
                 <Icon name={nameIcon} style={iconStyle}/>
-                {badge && <TextComponent text={badge} size={global.sizeP15} color={global.colorF4} style={badgeStyle}/>}
+                {badge ?
+                    <View style={badgeStyle}><TextComponent text={badge} size={global.sizeP15} color={global.colorF4}
+                                                            style={{
+                                                                lineHeight: 15,
+                                                                textAlign: 'center'
+                                                            }}/></View> : null}
             </View>
-        </TouchableNativeFeedback>
+        </TouchableOpacity>
     );
 };
 

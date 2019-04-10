@@ -5,8 +5,8 @@ import { StyleSheet ,Platform} from 'react-native';
         height:50,
         backgroundColor:"#f3f3f3",
       // marginTop: 20,
-        justifyContent:'center'
-        
+        justifyContent:'center',
+
     },
     wrapper:{
         //marginLeft:15,

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Dimensions, Image, TouchableWithoutFeedback, Animated} from 'react-native';
+import {View, Dimensions, Image, TouchableOpacity, Animated} from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './styles';
 import global from '../../Styles/global';
@@ -25,7 +25,7 @@ class VideoCardItem extends Component {
     render() {
         const {uriImage,uriVideo, title, subText, onClick} = this.props;
         return (
-            <TouchableWithoutFeedback onPress={onClick}>
+            <TouchableOpacity onPress={onClick}>
                 <Animated.View style={[styles.viewItem, {
                     transform: [
                         {
@@ -62,7 +62,7 @@ class VideoCardItem extends Component {
                         </View>
                     </View>
                 </Animated.View>
-            </TouchableWithoutFeedback>
+            </TouchableOpacity>
         );
     }
 }

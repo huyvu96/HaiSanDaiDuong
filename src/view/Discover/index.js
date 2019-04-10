@@ -45,13 +45,14 @@ class Discover extends Component {
                     <Header
                         customHeaderStyle={{backgroundColor: global.colorTextPrimary}}
                         leftHeader={<RoundAvatar
-                            uriImage={'https://scontent.fsgn5-1.fna.fbcdn.net/v/t31.0-8/28947677_2062594664016900_292927065248317668_o.jpg?_nc_cat=0&oh=775d76fd07b115764f1f664753d00866&oe=5BE4B82F'}
+                            uriImage={'https://scontent.fsgn5-2.fna.fbcdn.net/v/t31.0-8/28947677_2062594664016900_292927065248317668_o.jpg?_nc_cat=107&_nc_oc=AQmb-5-k1sI5qSeloiNBLt4y58-QAVdE_XvJd7fSengFmRhWvfjXe7nxwMOobekhhyg&_nc_ht=scontent.fsgn5-2.fna&oh=d017d0d67ad9564a80d1125e7d3fc60d&oe=5D48AD2F'}
                             avatarStyle={{height: 35, width: 35}}/>}
                         body={<Text
-                            text='Khám phá'
+                            text='Tin Tức'
                             color={global.colorF3}
                             size={global.sizeP20}
-                            fontFamily={global.fontLight}
+                            style={{lineHeight: 22}}
+                            fontFamily={global.fontBold}
                             bold={global.fontWeightDark}/>}
                         rightHeader={
                             <IconButton
