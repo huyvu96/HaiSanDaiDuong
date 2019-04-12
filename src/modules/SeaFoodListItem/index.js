@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Dimensions, Image, TouchableWithoutFeedback, Animated} from 'react-native';
+import {View, Dimensions, Image, TouchableOpacity, Animated} from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './styles';
 import global from '../../Styles/global';
@@ -11,12 +11,12 @@ const {height, width} = Dimensions.get('window');
 class SeaFoodListItem extends Component {
     state = {
         animation: new Animated.Value(0)
-    }
+    };
 
     componentWillMount() {
         Animated.timing(this.state.animation, {
             toValue: 1,
-            duration: 500,
+            duration: 300,
             delay: this.props.index * 400
         }).start();
     }
@@ -24,13 +24,13 @@ class SeaFoodListItem extends Component {
     render() {
         const {uriImage, title, subText, onClick, onRemove, onChecked} = this.props;
         return (
-            <TouchableWithoutFeedback onPress={onClick}>
+            <TouchableOpacity onPress={onClick}>
                 <Animated.View style={[styles.viewItem, {
                     transform: [
                         {
                             translateY: this.state.animation.interpolate({
                                 inputRange: [0, 1],
-                                outputRange: [700, 1]
+                                outputRange: [400, 1]
                             })
                         }
                     ]
@@ -58,7 +58,7 @@ class SeaFoodListItem extends Component {
                                     styleText={styles.textStyle}
                     />
                 </Animated.View>
-            </TouchableWithoutFeedback>
+            </TouchableOpacity>
         );
     }
 }

@@ -10,11 +10,16 @@ import Header from '../../modules/Header/index';
 import IconButton from '../../Components/Button/IconButton';
 import ModalBox from 'react-native-modalbox';
 import ButtonWithIcon from '../../Components/Button/ButtonWithIcon';
+import ModalContactView from '../../modules/ModalContactView'
 import FloatingButton from '../../Components/Button/FloatingButton';
 import * as NAME_ACTION from '../../Redux/Constants/actionTypes';
 import * as ACTION from '../../Redux/ActionCreator/cartActionCreator';
 import {connect} from "react-redux";
-
+import call from "react-native-phone-call";
+const args = {
+    number: '0888890011', // String value with the number to call
+    prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call 
+}
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -102,15 +107,16 @@ class Home extends Component {
             <View style={styles.container}>
                 <Header
                     customHeaderStyle={{backgroundColor: global.colorTextPrimary}}
-                    leftHeader={<IconButton nameIcon='ios-search' iconStyle={{fontSize: 35, color: global.colorF3}}/>}
+                    leftHeader={<IconButton nameIcon='ios-search' iconStyle={{fontSize: 30, color: global.colorF3}}/>}
                     body={<Text
                         text='Hải Sản Đại Dương'
                         color={global.colorF3}
                         size={global.sizeP20}
-                        fontFamily={global.fontLight}
+                        style={{lineHeight: 22}}
+                        fontFamily={global.fontBold}
                         bold={global.fontWeightDark}/>}
                     rightHeader={
-                        <IconButton badge={this.props.dataCart.length.toString() === '0' ? null :this.props.dataCart.length.toString() } nameIcon='ios-cart' iconStyle={{fontSize: 35, color: global.colorF3}}
+                        <IconButton badge={this.props.dataCart.length.toString() === '0' ? null :this.props.dataCart.length.toString() } nameIcon='ios-cart' iconStyle={{fontSize: 30, color: global.colorF3}}
                                     onClick={() => this.props.navigation.push('Cart')}/>}
                 />
                 <TabItems
@@ -120,14 +126,16 @@ class Home extends Component {
                     onIndexChange={this._handleIndexChange}
                 />
                 {
-                    !this.state.openPhone ? (!this.state.onScrolling ? <FloatingButton nameIcon='ios-call' onPress={() => {
-                        this.setState({openPhone: true})
+                    !this.state.openPhone ? (!this.state.onScrolling ? <FloatingButton nameIcon='ios-call' onClick={() => {
+                        //this.setState({openPhone: true})
+                      // this.modalContact.openModal({})
+                      call(args).catch(console.error)
                     }}/> : null):(null)
                 }
-                <ModalBox
+                {/* <ModalBox
                     style={styles.modalbox}
                     isOpen={this.state.openPhone}
-                    animationDuration ={0}
+                    animationDuration ={1}
                     swipeToClose={false}
                     position='center'
                     onClosed={() => this.setState({openPhone: false})}
@@ -150,14 +158,19 @@ class Home extends Component {
                         style={styles.btn_with_icon}
                         styleText={styles.btn_with_icon_text}
                     />
-                </ModalBox>
-
+                </ModalBox> */}
+                  {/* <ModalContactView
+                    {...this.props}
+                    ref={ref =>this.modalContact = ref}
+                    styleModalPopupCustom={{}}
+                /> */}
             </View>
         );
     }
 }
 function mapStateToProps(state) {
     return {
+        userInfo:state.login.userInfo,
         dataCart: state.cart.dataCart,
         dataShop: state.cart.dataShop
     };

@@ -25,7 +25,8 @@ export default StyleSheet.create({
     },
     swipeImage: {
         height: height / 3.5,
-        width: '100%'
+        width: '100%',
+        resizeMode: 'cover'
     },
     slide: {
         position: "absolute",

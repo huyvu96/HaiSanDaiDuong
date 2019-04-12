@@ -1,10 +1,11 @@
 import React, {Commponent} from "react";
-import {View, TouchableOpacity, Dimensions, Platform, Image, LayoutAnimation} from "react-native";
+import {View, TouchableOpacity, Dimensions, Platform, Image, LayoutAnimation, Alert} from "react-native";
 import ModalOder from '../../Components/Modal/ModalOder'
 import Text from "../../Components/Text/Text";
 import ButtonWithIcon from "../../Components/Button/ButtonWithIcon";
 import global from "../../Styles/global";
 import TextInput from '../../Components/TextInput/TextSingleInput';
+import moment from 'moment';
 
 const {height, width} = Dimensions.get("window");
 export default class ModalOderView extends ModalOder {
@@ -14,16 +15,67 @@ export default class ModalOderView extends ModalOder {
             ...this.state,
             animationDuration: 150,
             numPhone: '',
-            note: ''
+            note: '',
+            total:'',
+            warning: false
         };
+        this.openModal = this.openModal.bind(this);
+        this.onCloseModal = this.onCloseModal.bind(this);
+        this.onAddCartToSever = this.onAddCartToSever.bind(this);
     }
 
     openModal(params) {
+        this.setState({
+            numPhone: params.numPhone,
+            total: params.total
+        });
         super.openModal();
     }
 
     onCloseModal() {
-        super.onCloseModal();
+        this.setState({
+            warning: false
+        });
+        this.props.navigation.goBack();
+        this.closeModal();
+    }
+    _onUpdate(item) {
+        Alert.alert(
+            null,
+            'Bạn có muốn xoá sản phẩm này ?',
+            [
+                {text: 'Không', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                {
+                    text: 'Có', onPress: () => {
+                        this.props.cartAction.deleteItemCheck(item.id)
+                    }
+                },
+            ],
+            {cancelable: false}
+        )
+    }
+    onAddCartToSever() {
+        const{numPhone} = this.state;
+        if (numPhone && numPhone.length >=10) {
+            let data ={
+                data :this.props.dataCart,
+                uid: this.props.userInfo.uid,
+                numPhone: numPhone,
+                note:this.state.note,
+                timeIn: moment(new Date()).format("DD/MM/YYYY hh:mm:ss"),
+                total: this.state.total
+            };
+            this.props.cartAction.updateLoadCartProduct(data);
+            this.onCloseModal();
+            this.setState({
+                numPhone:'',
+                note:''
+            })
+        } else {
+            this.setState({
+                warning: true
+            })
+        }
     }
 
     renderHeader() {
@@ -43,10 +95,12 @@ export default class ModalOderView extends ModalOder {
             <View>
                 <TextInput
                     value={this.state.numPhone}
-                    onChangeText={input => this.setState({numPhone: input})}
+                    onChangeText={input =>  this.setState({numPhone: input, warning:false})}
                     nameIcon={'ios-call-outline'}
                     placeholder={'Hãy để lại số điện thoại của bạn'}
-                    warning={true}
+                    warning={this.state.warning}
+                    onFocus={()=> this.setState({warning: false})}
+                    onSubmitEditing={() => this.setState({warning: false})}
                     keyboardType={'numeric'}
                     maxLength={11}
                     returnKeyType={'done'}/>
@@ -92,16 +146,14 @@ export default class ModalOderView extends ModalOder {
                     }}
                 />
                 <ButtonWithIcon
-                    onClick={() => this.props.cartAction.updateLoadCartProduct(this.props.dataCart, this.props.userInfo.uid)}
+                    onClick={() => this.onAddCartToSever()}
                     buttonText={'Gửi đơn hàng'}
                     style={{
                         margin: 5,
-                        //width: (width / 2) - 100,
                         height: 40,
                         backgroundColor: global.red,
                         borderRadius: 20,
                         flex: 1,
-                        //alignSelf: 'center',
                         alignItems: 'center',
                         justifyContent: 'center'
                     }}

@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
     imageItem: {
         height: 188,
         width: width / 2,
-        resizeMode: 'cover'
     },
     styleTextName: {
         opacity: 0.8,

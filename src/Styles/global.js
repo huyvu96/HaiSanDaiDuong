@@ -18,15 +18,15 @@ export default  {
     fontWeightDark: '600',
   
     // addFont Muli
-    fontLight: 'Muli-Light',
-    fontLightItalic: 'Muli-LightItalic',
-    fontRegular: 'Muli-Regular',
-    fontRegularItalic: 'Muli-Italic',
-    fontSemiBold: 'Muli-SemiBold',
-    fontSemiBoldItalic: 'Muli-Semi-BoldItalic',
-    fontBold: 'Muli-Bold',
-    fontBoldItalic: 'Muli-BoldItalic',
-    fontExtraBold: 'Muli-ExtraBold',
+    fontLight: 'Montserrat-Light',
+    fontLightItalic: 'Montserrat-LightItalic',
+    fontRegular: 'Montserrat-Regular',
+    fontRegularItalic: 'Montserrat-Italic',
+    fontSemiBold: 'Montserrat-SemiBold',
+    fontSemiBoldItalic: 'Montserrat-Semi-BoldItalic',
+    fontBold: 'Montserrat-Bold',
+    fontBoldItalic: 'Montserrat-BoldItalic',
+    fontExtraBold: 'Montserrat-ExtraBold',
   
     // for Avatar random background
     naviGreen: '#1ABC9C',
@@ -37,6 +37,7 @@ export default  {
     orange: '#E67E22',
     red: '#E74C3C',
     grey: '#95A5A6',
+    black:'#000000',
   // for Registration
     color66: '#666666',
     colorF4: '#f4f4f4',

@@ -25,7 +25,8 @@ export default StyleSheet.create({
         height: 30,
         width: 30,
         borderRadius: 20,
-        textAlign: 'center'
+        alignItems:'center',
+        justifyContent:'center'
     },
     view_tamtinh:{
         flexDirection: 'row',

@@ -1,23 +1,26 @@
 import React, {Component} from 'react';
-import {View, StatusBar, Dimensions} from 'react-native';
-import store from './Redux/Store/configStore'
+import {View, StatusBar, Dimensions, Platform} from 'react-native';
+import configureStore from './Redux/Store/configStore'
+import {PersistGate} from 'redux-persist/lib/integration/react';
 import {Provider} from 'react-redux'
 import {createStackNavigator, createBottomTabNavigator} from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Home from './view/Home';
-import History from './view/History';
 import Account from './view/Account';
 import Login from './view/Login';
 import Cart from './view/Cart';
 import global from './Styles/global';
 import Notification from "./view/Notification";
 import Discover from "./view/Discover";
+import History from './view/History'
+
+const {persistor, store} = configureStore();
+const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
 
 const {height, width} = Dimensions.get('window');
 const TabBar = createBottomTabNavigator({
         Home: Home,
         Discover: Discover,
-        Notification: Notification,
         Account: Account
     }, {
         navigationOptions: ({navigation}) => ({
@@ -26,23 +29,20 @@ const TabBar = createBottomTabNavigator({
                 let iconName;
                 switch (routeName) {
                     case 'Home':
-                        iconName = (<Ionicons name="md-home" style={{fontSize: 35, color: tintColor}}/>);
+                        iconName = "md-home";
                         break;
                     case 'Discover':
-                        iconName = (<Ionicons name="md-globe" style={{fontSize: 35, color: tintColor}}/>);
-                        break;
-                    case 'Notification':
-                        iconName = (<Ionicons name="md-notifications" style={{fontSize: 35, color: tintColor}}/>);
+                        iconName = "md-globe";
                         break;
                     case 'Account':
-                        iconName = (<Ionicons name="md-contact" style={{fontSize: 35, color: tintColor}}/>);
+                        iconName = "md-contact";
                         break;
                 }
-                return iconName;
+                return <Ionicons name={iconName} style={{fontSize: height / 18, color: tintColor}}/>;
             },
         }),
         initialRouteName: 'Home',
-        lazyLoad: false,
+        lazyLoad: true,
         swipeEnabled: false,
         animationEnabled: false,
         tabBarPosition: 'bottom',
@@ -68,7 +68,8 @@ const TabBar = createBottomTabNavigator({
 const RootNavigator = createStackNavigator({
         TabBar: {screen: TabBar},
         Login: {screen: Login},
-        Cart: {screen: Cart}
+        Cart: {screen: Cart},
+        History: {screen: History},
     },
     {
         initialRouteName: "Login",
@@ -83,13 +84,14 @@ export default class App extends Component {
     render() {
         return (
             <Provider store={store}>
-                <View style={{flex: 1}}>
-                    <StatusBar
-                        backgroundColor="#2980b9"
-                        translucent={false}
-                    />
-                    <RootNavigator/>
-                </View>
+                <PersistGate loading={null} persistor={persistor}>
+                    <View style={{flex: 1}}>
+                        <View style={{height: STATUSBAR_HEIGHT, backgroundColor: "#2980b9"}}>
+                            <StatusBar backgroundColor="#2980b9"/>
+                        </View>
+                        <RootNavigator/>
+                    </View>
+                </PersistGate>
             </Provider>
         );
     }

@@ -2,6 +2,7 @@ package com.haisandaiduong;
 
 import android.app.Application;
 import com.facebook.react.ReactApplication;
+import com.dylanvann.fastimage.FastImageViewPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import io.invertase.firebase.RNFirebasePackage;
@@ -25,10 +26,13 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(new MainReactPackage(), new VectorIconsPackage(), new LinearGradientPackage(),
-          new RNFirebasePackage(), new RNFirebaseAuthPackage(), // <-- Add this line
-          new RNFirebaseDatabasePackage(), // <-- Add this line
-          new RNFirebaseStoragePackage() // <-- Add this line
+      return Arrays.<ReactPackage>asList(
+          new MainReactPackage(),
+            new FastImageViewPackage(),
+            new VectorIconsPackage(),
+            new LinearGradientPackage(),
+          new RNFirebasePackage(),
+          new RNFirebaseAuthPackage()
 
       );
     }

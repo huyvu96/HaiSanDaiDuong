@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Dimensions, KeyboardAvoidingView,Keyboard} from 'react-native';
+import {View, Dimensions, Platform, Keyboard, Alert} from 'react-native';
 import styles from './styles';
 import global from '../../Styles/global';
 import Text from '../../Components/Text/Text';
@@ -8,20 +8,37 @@ import IconButton from '../../Components/Button/IconButton';
 import SeaFoodListView from "../../modules/SeaFoodListView";
 import * as cartAction from "../../Redux/ActionCreator/cartActionCreator";
 import {connect} from "react-redux";
-import { bindActionCreators } from "redux";
+import {bindActionCreators} from "redux";
 import ButtonWithIcon from "../../Components/Button/ButtonWithIcon";
 import ModalOderView from '../../modules/ModalOderView';
-const {height, width} = Dimensions.get('window');
 import Currency from '../../Global/Currency';
-import ModalBox from 'react-native-modalbox';
-import TextInput from '../../Components/TextInput/TextSingleInput';
+
+const {height, width} = Dimensions.get('window');
+const IS_IOS = Platform.OS === "ios";
 
 class Cart extends Component {
-    state = {
-        isOpen: false,
-        numPhone: '',
-        note: ''
-    };
+    constructor(props) {
+        super(props);
+        this.state = {};
+        this._onRemove = this._onRemove.bind(this);
+    }
+
+    _onRemove(item) {
+        Alert.alert(
+            null,
+            'Bạn có muốn xoá sản phẩm này ?',
+            [
+                {text: 'Không', onPress: () => console.log('Cancel Pressed'), style: IS_IOS ? 'cancel' : 'negative'},
+                {
+                    text: 'Có', onPress: () => {
+                        this.props.cartAction.deleteItemCheck(item.id)
+                    }, style: IS_IOS ? 'destructive' : 'positive'
+                },
+            ],
+            {cancelable: false}
+        )
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -34,30 +51,43 @@ class Cart extends Component {
                         text='Giỏ hàng'
                         color={global.colorF3}
                         size={global.sizeP20}
-                        fontFamily={global.fontLight}
-                        bold={global.fontWeightDark}/>}
-                    rightHeader={<Text
-                        text={this.props.dataCart.length.toString() === '0' ? '0' : this.props.dataCart.length.toString()}
-                        color={global.colorF3}
-                        size={global.sizeP18}
+                        style={{lineHeight: 22}}
                         fontFamily={global.fontBold}
-                        style={styles.right_header}/>}
+                        bold={global.fontWeightDark}/>}
+                    rightHeader={<View style={styles.right_header}>
+                        <Text
+                            text={this.props.dataCart.length.toString() === '0' ? '0' : this.props.dataCart.length.toString()}
+                            color={global.colorF3}
+                            size={global.sizeP18}
+                            fontFamily={global.fontBold}
+                            style={{lineHeight: 20}}/>
+                    </View>}
                 />
                 <View style={styles.view_tamtinh}>
-                    <Text text={'Tạm tính: '} color={global.red} fontFamily={global.fontRegular} size={global.sizeP18}/>
+                    <Text text={'Tạm tính: '}
+                          color={global.red}
+                          fontFamily={global.fontRegular}
+                          size={global.sizeP18}/>
                     <Text
-                        text={(this.props.total !== '' ? Currency.convertNumberToCurrency(this.props.total) : '0') + ' VNĐ'}
-                        color={global.red} fontFamily={global.fontRegularItalic} size={global.sizeP18}/>
+                        text={(this.props.total && this.props.total !== '' ? Currency.convertNumberToCurrency(this.props.total) : '0') + ' VNĐ'}
+                        color={global.red}
+                        fontFamily={global.fontRegularItalic}
+                        size={global.sizeP18}/>
                 </View>
-                <SeaFoodListView data={this.props.dataCart}/>
+                <SeaFoodListView
+                    data={this.props.dataCart}
+                    onRemove={this._onRemove}/>
                 <View style={styles.view_list_card}>
                     <ButtonWithIcon buttonText={this.props.dataCart.length === 0 ? 'Giỏ hàng trống' : 'Đặt hàng ngay'}
-                                    onClick={() => (this.props.dataCart.length === 0 ? console.log('onClick') : this.refs.modalOder.openModal())}/>
+                                    onClick={() => (this.props.dataCart.length === 0 ? null : this.refs.modalOder.openModal({
+                                        numPhone: this.props.userInfo.phoneNumber,
+                                        total: Currency.convertNumberToCurrency(this.props.total)
+                                    }))}/>
                 </View>
                 <ModalOderView
                     {...this.props}
                     ref={'modalOder'}
-                    styleModalPopupCustom={{backgroundColor:global.colorTextPrimary}}
+                    styleModalPopupCustom={{backgroundColor: global.colorTextPrimary}}
                 />
             </View>
         );

@@ -1,6 +1,3 @@
-/**
- * Created by hieult on 1/3/18.
- */
 
 import React, {Commponent} from "react";
 import {View, TouchableOpacity} from "react-native";

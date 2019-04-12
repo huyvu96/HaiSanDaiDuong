@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {TouchableNativeFeedback, View,Image} from 'react-native';
+import {TouchableOpacity, View,Image} from 'react-native';
 import PropTypes from 'prop-types';
 import global from "../../Styles/global";
+import FastImage from 'react-native-fast-image'
 
 const RoundAvatar = ({uriImage, avatarStyle, onClick,disableClick}) => {
     let imageStyle = {
@@ -9,16 +10,15 @@ const RoundAvatar = ({uriImage, avatarStyle, onClick,disableClick}) => {
         width:50,
         borderRadius:25,
         borderColor:'white',
-        borderWidth:1,
-    };
+        borderWidth:1};
     return (
-        <TouchableNativeFeedback onPress={onClick} disable ={disableClick}>
-            <Image
+        <TouchableOpacity onPress={onClick} disable ={disableClick}>
+            <FastImage
+                resizeMode={FastImage.resizeMode.cover}
                 source={{uri:uriImage}}
-                resizeMode={Image.resizeMode.cover}
                 style={[imageStyle, avatarStyle]}
             />
-        </TouchableNativeFeedback>
+        </TouchableOpacity>
     );
 };
 
