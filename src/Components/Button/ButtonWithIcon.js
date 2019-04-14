@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
     Text,
     View,
@@ -7,7 +7,7 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import PropTypes from "prop-types";
 
-const ButtonWithIcon = ({nameIcon, icoStyle, style, buttonText, styleText, onClick}) => {
+const ButtonWithIcon = ({ nameIcon, icoStyle, style, buttonText, styleText, onClick }) => {
     let buttonStyle = {
         flexDirection: 'row',
         justifyContent: 'center',
@@ -28,11 +28,9 @@ const ButtonWithIcon = ({nameIcon, icoStyle, style, buttonText, styleText, onCli
         color: 'white'
     };
     return (
-        <TouchableOpacity onPress={onClick}>
-            <View style={[buttonStyle, style]}>
-                {!nameIcon ? (null) : (<Icon name={nameIcon} style={[iconStyle, icoStyle]}/>)}
-                <Text style={[textStyle, styleText]}>{buttonText}</Text>
-            </View>
+        <TouchableOpacity style={[buttonStyle, style]} onPress={onClick}>
+            {!nameIcon ? (null) : (<Icon name={nameIcon} style={[iconStyle, icoStyle]} />)}
+            <Text style={[textStyle, styleText]}>{buttonText}</Text>
         </TouchableOpacity>
 
     );

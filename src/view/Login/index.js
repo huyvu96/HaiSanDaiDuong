@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
     View,
     Image,
@@ -14,11 +14,7 @@ import styles from './styles';
 import Text from '../../Components/Text/Text';
 import global from "../../Styles/global";
 import Icon from 'react-native-vector-icons/Ionicons'
-import {connect} from 'react-redux';
-import {
-    AccessToken,
-    LoginManager
-} from 'react-native-fbsdk';
+import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
 import loginService from '../../services/serviceLogin';
 import * as ACTION_LOGIN from "../../Redux/ActionCreator/actionLoginCreators";
@@ -32,7 +28,7 @@ import ButtonWithIcon from "../../Components/Button/ButtonWithIcon";
 import IconButton from "../../Components/Button/IconButton";
 import TextComponent from "../../Components/Text/Text";
 
-const {height, width} = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 
 class Login extends Component {
     constructor(props) {
@@ -52,9 +48,10 @@ class Login extends Component {
     }
 
     componentDidMount() {
+        this.props.getProduct();
         this.unsubscribe = firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-                this.setState({user: user.toJSON()});
+                this.setState({ user: user.toJSON() });
             } else {
                 // User has been signed out, reset the state
                 this.setState({
@@ -96,17 +93,17 @@ class Login extends Component {
     };
 
     renderPhoneNumberInput() {
-        const {phoneNumber} = this.state;
+        const { phoneNumber } = this.state;
 
         return (
-            <View style={{paddingLeft: width / 3 - 80, paddingTop: 100}}>
+            <View style={{ paddingLeft: width / 3 - 80, paddingTop: 100 }}>
                 <TextComponent text={'Hãy nhập số điện thoại của bạn'} size={global.sizeP16}
-                               fontFamily={global.fontRegular}
-                               color={global.colorTextPrimary}/>
+                    fontFamily={global.fontRegular}
+                    color={global.colorTextPrimary} />
                 <TextInput
                     autoFocus
-                    style={{height: 40, marginTop: 15, marginBottom: 15}}
-                    onChangeText={value => this.setState({phoneNumber: value})}
+                    style={{ height: 40, marginTop: 15, marginBottom: 15 }}
+                    onChangeText={value => this.setState({ phoneNumber: value })}
                     placeholder={'Phone number ... '}
                     value={phoneNumber}
                 />
@@ -126,14 +123,14 @@ class Login extends Component {
 
         return (
             // View lớn nhất
-            <View style={{flex: 1}}>
+            <View style={{ flex: 1 }}>
                 {/* <StatusBar
                 backgroundColor="transparent"
                 translucent = {true}
             /> */}
                 <ImageBackground
-                    source={{uri: 'https://raw.githubusercontent.com/react-native-training/react-native-elements-app/master/assets/images/bg_screen3.jpg'}}
-                    style={{flex: 1}}
+                    source={{ uri: 'https://raw.githubusercontent.com/react-native-training/react-native-elements-app/master/assets/images/bg_screen3.jpg' }}
+                    style={{ flex: 1 }}
                 >
                     {/* View này là View trên */}
                     <Animatable.View style={{
@@ -153,7 +150,7 @@ class Login extends Component {
                                 opacity: headerTextOpacity
                             }}>
                             <TextComponent text={'HSĐD'} size={global.sizeP25} fontFamily={global.fontBold}
-                                           color={global.colorTextPrimary}/>
+                                color={global.colorTextPrimary} />
                         </Animatable.View>
                     </Animatable.View>
 
@@ -177,12 +174,12 @@ class Login extends Component {
                                     backgroundColor: 'transparent'
                                 }}>
                                 <IconButton onClick={() => this.decreaseHeightOfLogin()}
-                                            nameIcon={'md-arrow-back'}
-                                            btnStyle={{
-                                                backgroundColor: global.colorTextPrimary, height: 50,
-                                                width: 50, borderRadius: 30,
-                                            }}
-                                            iconStyle={{color: 'white', fontSize: 30, position: 'relative'}}/>
+                                    nameIcon={'md-arrow-back'}
+                                    btnStyle={{
+                                        backgroundColor: global.colorTextPrimary, height: 50,
+                                        width: 50, borderRadius: 30,
+                                    }}
+                                    iconStyle={{ color: 'white', fontSize: 30, position: 'relative' }} />
                             </Animated.View>
                             <Animated.View
                                 style={{
@@ -193,7 +190,7 @@ class Login extends Component {
                                 }}>
                                 {/* View chính sign in sign up */}
 
-                                <View style={{flex: 1}}>
+                                <View style={{ flex: 1 }}>
                                     {this.renderPhoneNumberInput()}
                                 </View>
 
@@ -209,10 +206,10 @@ class Login extends Component {
                                 }}
                             >
                                 <TextComponent numberOfLines={2}
-                                               text={'Hải sản đại dương kính chào !!'}
-                                               size={global.sizeP20}
-                                               fontFamily={global.fontRegular}
-                                               color={global.colorTextPrimary}/>
+                                    text={'Hải sản đại dương kính chào !!'}
+                                    size={global.sizeP20}
+                                    fontFamily={global.fontRegular}
+                                    color={global.colorTextPrimary} />
                             </Animated.View>
                             {/* Button log in facebook */}
                             {/* Biến mất button */}
@@ -227,11 +224,11 @@ class Login extends Component {
                                     backgroundColor: global.colorTextPrimary,
                                     marginTop: 15,
                                     paddingHorizontal: 25,
-                                    alignSelf:'center'
-                                }}  buttonText={'Khám phá ngay'} styleText={{
+                                    alignSelf: 'center'
+                                }} buttonText={'Khám phá ngay'} styleText={{
                                     color: global.colorFF,
                                     fontSize: 23,
-                                }} onClick={() => this.increaseHeightOfLogin()}/>
+                                }} onClick={() => this.increaseHeightOfLogin()} />
                             </Animated.View>
                         </Animated.View>
                         {/* view social network */}
@@ -278,7 +275,7 @@ class Login extends Component {
                                 lineHeight: 24, textAlign: 'center',
                                 color: global.colorFF,
                                 fontSize: 23
-                            }} onClick={() => this.props.navigation.navigate('TabBar')}/> : null
+                            }} onClick={() => this.props.navigation.navigate('TabBar')} /> : null
                         }
                     </Animated.View>
                 </ImageBackground>

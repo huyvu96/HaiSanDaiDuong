@@ -1,24 +1,24 @@
-import { StyleSheet ,Platform} from 'react-native';
+import { StyleSheet, Platform, Dimensions } from 'react-native';
+const { height, width } = Dimensions.get('window');
 
- const styles = StyleSheet.create({
-    container:{
-        height:50,
-        backgroundColor:"#f3f3f3",
-      // marginTop: 20,
-        justifyContent:'center',
-
+const styles = StyleSheet.create({
+    container: {
+        height: 50,
+        backgroundColor: "#f3f3f3",
+        // marginTop: 20,
+        justifyContent: 'center',
     },
-    wrapper:{
+    wrapper: {
         //marginLeft:15,
         //marginRight: 10,
-        paddingLeft:15, paddingRight:15,
+        paddingLeft: 15, paddingRight: 15,
         flexDirection: 'row',
-        justifyContent:"space-between",
-        flex:1,
+        justifyContent: "space-between",
+        flex: 1,
         alignItems: 'center',
     },
-    leftHeader:{width:50,alignItems:'flex-start'},
-    rightHeader:{width:50,alignItems:'flex-end'},
-    bodyHeader:{ flex: 1, maxWidth: 200, alignItems: "center" }
+    leftHeader: { maxWidth: width / 2 - 100, width: width / 2 - 100, alignItems: 'flex-start' },
+    rightHeader: { maxWidth: width / 2 - 100, width: width / 2 - 100, alignItems: 'flex-end' },
+    bodyHeader: { flex: 2, alignItems: "center" }
 });
 export default styles;

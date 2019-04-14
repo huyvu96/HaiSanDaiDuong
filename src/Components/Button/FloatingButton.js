@@ -1,38 +1,30 @@
 import React, { Component } from 'react';
-import { View,TouchableOpacity,Dimensions } from 'react-native';
+import { View, TouchableOpacity, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-const { height } = Dimensions.get('window');
 import global from '../../Styles/global'
 import PropTypes from 'prop-types';
-
-const FloatingButton = ({nameIcon,icoStyle,btnStyle,onClick})=>{
-    let container = {
-        flex:1,
-        alignItems:'center',
-        justifyContent:'center'
-    };
+const { height } = Dimensions.get('window');
+const FloatingButton = ({ nameIcon, icoStyle, btnStyle, onClick }) => {
     let floatingButton = {
         position: 'absolute',
-        width:60,height:60,
+        width: 60, height: 60,
         backgroundColor: global.colorTextPrimary,
-        bottom:20,right:20,
+        bottom: 20, right: 20,
         borderRadius: 30,
-        alignItems:'center',
-        justifyContent:'center',
+        alignItems: 'center',
+        justifyContent: 'center',
         elevation: 2
     };
     let iconStyle = {
         fontSize: height / 20,
         color: 'white',
-        alignSelf:'center' 
+        alignSelf: 'center'
     };
     return (
-        <TouchableOpacity onPress ={onClick}>
-            <View style = {[floatingButton,btnStyle]}>
-            <Icon name={nameIcon} style={[iconStyle,icoStyle]}/>
-            </View>
+        <TouchableOpacity style={[floatingButton, btnStyle]} onPress={onClick}>
+            <Icon name={nameIcon} style={[iconStyle, icoStyle]} />
         </TouchableOpacity>
-);
+    );
 };
 
 FloatingButton.propTypes = {

@@ -26,13 +26,9 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-            new FastImageViewPackage(),
-            new VectorIconsPackage(),
-            new LinearGradientPackage(),
-          new RNFirebasePackage(),
-          new RNFirebaseAuthPackage()
+      return Arrays.<ReactPackage>asList(new MainReactPackage(), new FastImageViewPackage(), new VectorIconsPackage(),
+          new LinearGradientPackage(), new RNFirebasePackage(), new RNFirebaseAuthPackage(),
+          new RNFirebaseDatabasePackage() // <-- Add this line
 
       );
     }

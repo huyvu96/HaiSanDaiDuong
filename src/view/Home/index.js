@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {View,UIManager,LayoutAnimation} from 'react-native';
+import React, { Component } from 'react';
+import { View, UIManager, LayoutAnimation } from 'react-native';
 import styles from './styles';
 import data from '../../data';
 import SeaFoodGridView from '../../modules/SeaFoodGridView';
@@ -14,7 +14,7 @@ import ModalContactView from '../../modules/ModalContactView'
 import FloatingButton from '../../Components/Button/FloatingButton';
 import * as NAME_ACTION from '../../Redux/Constants/actionTypes';
 import * as ACTION from '../../Redux/ActionCreator/cartActionCreator';
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import call from "react-native-phone-call";
 const args = {
     number: '0888890011', // String value with the number to call
@@ -29,18 +29,18 @@ class Home extends Component {
             openCart: false,
             index: 0,
             routes: [
-                {key: '1', title: 'Cá Tươi'},
-                {key: '2', title: 'Cá sống'},
-                {key: '3', title: 'Cua - Ghẹ'},
-                {key: '4', title: 'Sò - Ốc'},
-                {key: '5', title: 'Tôm - Mực'},],
+                { key: '1', title: 'Cá Tươi' },
+                { key: '2', title: 'Cá sống' },
+                { key: '3', title: 'Cua - Ghẹ' },
+                { key: '4', title: 'Sò - Ốc' },
+                { key: '5', title: 'Tôm - Mực' },],
             onScrolling: false,
         };
-        this._listViewOffset= 0;
+        this._listViewOffset = 0;
         this.onScrolling = false;
         this._onScroll = this._onScroll.bind(this);
     }
-    _alert(item){
+    _alert(item) {
         alert(JSON.stringify(this.props.dataCart));
     }
     _onScroll(event) {
@@ -75,24 +75,24 @@ class Home extends Component {
         ) {
             LayoutAnimation.configureNext(CustomLayoutLinear);
             //this.onScrolling = onScrolling;
-            this.setState({onScrolling});
+            this.setState({ onScrolling });
         }
         console.log(this._listViewOffset, this.state.onScrolling);
         // Update your scroll position
         this._listViewOffset = currentOffset;
     }
-    _renderScene = ({route}) => {
+    _renderScene = ({ route }) => {
         switch (route.key) {
             case '1':
-                return <SeaFoodGridView onScroll={this._onScroll} data={this.props.dataShop.filter(e => e.category === 1)}/>;
+                return <SeaFoodGridView onScroll={this._onScroll} data={this.props.dataShop.filter(e => e.category === 1)} />;
             case '2':
-                return <SeaFoodGridView onScroll={this._onScroll} data={this.props.dataShop.filter(e => e.category === 2)}/>;
+                return <SeaFoodGridView onScroll={this._onScroll} data={this.props.dataShop.filter(e => e.category === 2)} />;
             case '3':
-                return <SeaFoodGridView onScroll={this._onScroll} data={this.props.dataShop.filter(e => e.category === 3)}/>;
+                return <SeaFoodGridView onScroll={this._onScroll} data={this.props.dataShop.filter(e => e.category === 3)} />;
             case '4':
-                return <SeaFoodGridView onScroll={this._onScroll} data={this.props.dataShop.filter(e => e.category === 4)}/>;
+                return <SeaFoodGridView onScroll={this._onScroll} data={this.props.dataShop.filter(e => e.category === 4)} />;
             case '5':
-                return <SeaFoodGridView onScroll={this._onScroll} data={this.props.dataShop.filter(e => e.category === 5)}/>;
+                return <SeaFoodGridView onScroll={this._onScroll} data={this.props.dataShop.filter(e => e.category === 5)} />;
             default:
                 return null;
         }
@@ -106,18 +106,18 @@ class Home extends Component {
         return (
             <View style={styles.container}>
                 <Header
-                    customHeaderStyle={{backgroundColor: global.colorTextPrimary}}
-                    leftHeader={<IconButton nameIcon='ios-search' iconStyle={{fontSize: 30, color: global.colorF3}}/>}
+                    customHeaderStyle={{ backgroundColor: global.colorTextPrimary }}
+                    leftHeader={<IconButton nameIcon='ios-search' iconStyle={{ fontSize: 30, color: global.colorF3 }} />}
                     body={<Text
                         text='Hải Sản Đại Dương'
                         color={global.colorF3}
                         size={global.sizeP20}
-                        style={{lineHeight: 22}}
+                        style={{ lineHeight: 22 }}
                         fontFamily={global.fontBold}
-                        bold={global.fontWeightDark}/>}
+                        bold={global.fontWeightDark} />}
                     rightHeader={
-                        <IconButton badge={this.props.dataCart.length.toString() === '0' ? null :this.props.dataCart.length.toString() } nameIcon='ios-cart' iconStyle={{fontSize: 30, color: global.colorF3}}
-                                    onClick={() => this.props.navigation.push('Cart')}/>}
+                        <IconButton badge={this.props.dataCart.length.toString() === '0' ? null : this.props.dataCart.length.toString()} nameIcon='ios-cart' iconStyle={{ fontSize: 30, color: global.colorF3 }}
+                            onClick={() => this.props.navigation.push('Cart')} />}
                 />
                 <TabItems
                     renderScene={this._renderScene}
@@ -126,60 +126,33 @@ class Home extends Component {
                     onIndexChange={this._handleIndexChange}
                 />
                 {
-                    !this.state.openPhone ? (!this.state.onScrolling ? <FloatingButton nameIcon='ios-call' onClick={() => {
+                   !this.state.onScrolling ? <FloatingButton nameIcon='ios-call' onClick={() => {
                         //this.setState({openPhone: true})
-                      // this.modalContact.openModal({})
-                      call(args).catch(console.error)
-                    }}/> : null):(null)
+                        // this.modalContact.openModal({})
+                        call(args).catch(console.error)
+                    }} /> : null
                 }
-                {/* <ModalBox
-                    style={styles.modalbox}
-                    isOpen={this.state.openPhone}
-                    animationDuration ={1}
-                    swipeToClose={false}
-                    position='center'
-                    onClosed={() => this.setState({openPhone: false})}
-                    onOpened={() => this.setState({openPhone: true})}
-                    backdropPressToClose={true}
-                    onClosingState={() => this.setState({openPhone: false})}
-                    >
-                    <Text text='Chọn số điện thoại gọi ngay nào'
-                          color={global.colorF3}
-                          fontFamily={global.fontRegular}
-                          size={global.sizeP18}
-                          style={{textAlign: 'center'}}/>
-                    <ButtonWithIcon
-                        buttonText='08888.333.333'
-                        style={styles.btn_with_icon}
-                        styleText={styles.btn_with_icon_text}
-                    />
-                    <ButtonWithIcon
-                        buttonText='08888.333.333'
-                        style={styles.btn_with_icon}
-                        styleText={styles.btn_with_icon_text}
-                    />
-                </ModalBox> */}
-                  {/* <ModalContactView
+                <ModalContactView
                     {...this.props}
-                    ref={ref =>this.modalContact = ref}
+                    ref={ref => this.modalContact = ref}
                     styleModalPopupCustom={{}}
-                /> */}
+                />
             </View>
         );
     }
 }
 function mapStateToProps(state) {
     return {
-        userInfo:state.login.userInfo,
+        userInfo: state.login.userInfo,
         dataCart: state.cart.dataCart,
         dataShop: state.cart.dataShop
     };
 }
 function mapDispatchToProps(dispatch) {
-  return {
-      addItemToCart: items => dispatch(ACTION.addItemToCart(items)),
-  };
+    return {
+        addItemToCart: items => dispatch(ACTION.addItemToCart(items)),
+    };
 }
-export default connect(mapStateToProps,mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 

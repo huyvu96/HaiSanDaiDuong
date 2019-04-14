@@ -15,7 +15,7 @@ import Discover from "./view/Discover";
 import History from './view/History'
 
 const {persistor, store} = configureStore();
-const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
+const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
 
 const {height, width} = Dimensions.get('window');
 const TabBar = createBottomTabNavigator({
