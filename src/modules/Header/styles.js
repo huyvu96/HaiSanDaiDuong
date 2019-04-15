@@ -17,8 +17,8 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
     },
-    leftHeader: { maxWidth: width / 2 - 100, width: width / 2 - 100, alignItems: 'flex-start' },
-    rightHeader: { maxWidth: width / 2 - 100, width: width / 2 - 100, alignItems: 'flex-end' },
+    leftHeader: { maxWidth: width / 2 - 150, width: width / 2 - 100, alignItems: 'flex-start' },
+    rightHeader: { maxWidth: width / 2 - 150, width: width / 2 - 100, alignItems: 'flex-end' },
     bodyHeader: { flex: 2, alignItems: "center" }
 });
 export default styles;

@@ -12,14 +12,16 @@ import FastImage from 'react-native-fast-image'
 const { height, width } = Dimensions.get('window');
 
 class SeaFoodItem extends Component {
-    state = {
-        animation: new Animated.Value(0)
+    constructor(props) {
+        super(props)
+        this.animation = new Animated.Value(0)
+
     }
     componentWillMount() {
-        Animated.timing(this.state.animation, {
+        Animated.timing(this.animation, {
             toValue: 1,
-            duration: 500,
-            delay: this.props.index * 400
+            duration: 300,
+            delay: this.props.index * 100
         }).start();
     }
 
@@ -30,7 +32,7 @@ class SeaFoodItem extends Component {
                 <Animated.View style={[styles.viewItem, {
                     transform: [
                         {
-                            translateY: this.state.animation.interpolate({
+                            translateY: this.animation.interpolate({
                                 inputRange: [0, 1],
                                 outputRange: [700, 1]
                             })

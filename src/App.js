@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import {View, StatusBar, Dimensions, Platform} from 'react-native';
+import React, { Component } from 'react';
+import { View, StatusBar, Dimensions, Platform } from 'react-native';
 import configureStore from './Redux/Store/configStore'
-import {PersistGate} from 'redux-persist/lib/integration/react';
-import {Provider} from 'react-redux'
-import {createStackNavigator, createBottomTabNavigator} from 'react-navigation';
+import { PersistGate } from 'redux-persist/lib/integration/react';
+import { Provider } from 'react-redux'
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Home from './view/Home';
 import Account from './view/Account';
@@ -14,31 +14,31 @@ import Notification from "./view/Notification";
 import Discover from "./view/Discover";
 import History from './view/History'
 
-const {persistor, store} = configureStore();
+const { persistor, store } = configureStore();
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
 
-const {height, width} = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 const TabBar = createBottomTabNavigator({
-        Home: Home,
-        Discover: Discover,
-        Account: Account
-    }, {
-        navigationOptions: ({navigation}) => ({
-            tabBarIcon: ({focused, tintColor}) => {
-                const {routeName} = navigation.state;
+    Home: { screen: Home, navigationOptions: { title: 'Cửa hàng' } },
+    Discover: { screen: Discover, navigationOptions: { title: 'Tin tức' } },
+    Account: { screen: Account, navigationOptions: { title: 'Cá nhân' } }
+}, {
+        navigationOptions: ({ navigation }) => ({
+            tabBarIcon: ({ focused, tintColor }) => {
+                const { routeName } = navigation.state;
                 let iconName;
                 switch (routeName) {
                     case 'Home':
-                        iconName = "md-home";
+                        iconName = "md-cash";
                         break;
                     case 'Discover':
-                        iconName = "md-globe";
+                        iconName = "md-paper";
                         break;
                     case 'Account':
                         iconName = "md-contact";
                         break;
                 }
-                return <Ionicons name={iconName} style={{fontSize: height / 18, color: tintColor}}/>;
+                return <Ionicons name={iconName} style={{ fontSize: height / 18, color: tintColor }} />;
             },
         }),
         initialRouteName: 'Home',
@@ -47,7 +47,7 @@ const TabBar = createBottomTabNavigator({
         animationEnabled: false,
         tabBarPosition: 'bottom',
         tabBarOptions: {
-            showLabel: false,
+            showLabel: true,
             showIcon: true,
             style: {
                 backgroundColor: global.colorF4,
@@ -66,13 +66,13 @@ const TabBar = createBottomTabNavigator({
     }
 );
 const RootNavigator = createStackNavigator({
-        TabBar: {screen: TabBar},
-        Login: {screen: Login},
-        Cart: {screen: Cart},
-        History: {screen: History},
-    },
+    TabBar: { screen: TabBar },
+    Login: { screen: Login },
+    Cart: { screen: Cart },
+    History: { screen: History },
+},
     {
-        initialRouteName: "Login",
+        initialRouteName: "TabBar",
         headerMode: "none",
     }
 );
@@ -85,11 +85,11 @@ export default class App extends Component {
         return (
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
-                    <View style={{flex: 1}}>
-                        <View style={{height: STATUSBAR_HEIGHT, backgroundColor: "#2980b9"}}>
-                            <StatusBar backgroundColor="#2980b9"/>
+                    <View style={{ flex: 1 }}>
+                        <View style={{ height: STATUSBAR_HEIGHT, backgroundColor: "#2980b9" }}>
+                            <StatusBar backgroundColor="#2980b9" />
                         </View>
-                        <RootNavigator/>
+                        <RootNavigator />
                     </View>
                 </PersistGate>
             </Provider>

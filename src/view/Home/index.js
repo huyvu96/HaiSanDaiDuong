@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, UIManager, LayoutAnimation } from 'react-native';
+import { View, UIManager, LayoutAnimation, Dimensions } from 'react-native';
 import styles from './styles';
 import data from '../../data';
 import SeaFoodGridView from '../../modules/SeaFoodGridView';
@@ -20,6 +20,7 @@ const args = {
     number: '0888890011', // String value with the number to call
     prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call 
 }
+const { height, width } = Dimensions.get('window');
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -126,16 +127,14 @@ class Home extends Component {
                     onIndexChange={this._handleIndexChange}
                 />
                 {
-                   !this.state.onScrolling ? <FloatingButton nameIcon='ios-call' onClick={() => {
-                        //this.setState({openPhone: true})
-                        // this.modalContact.openModal({})
-                        call(args).catch(console.error)
+                    !this.state.onScrolling ? <FloatingButton nameIcon='ios-call' onClick={() => {
+                        this.modalContact.openModal(); //call(args).catch(console.error)
                     }} /> : null
                 }
                 <ModalContactView
                     {...this.props}
                     ref={ref => this.modalContact = ref}
-                    styleModalPopupCustom={{}}
+                    styleModalPopupCustom={{ width: width - 40 }}
                 />
             </View>
         );

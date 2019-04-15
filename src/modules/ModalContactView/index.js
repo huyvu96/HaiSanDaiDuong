@@ -1,5 +1,5 @@
-import React, {Commponent} from "react";
-import {View, TouchableOpacity, Dimensions, Platform, Image, LayoutAnimation, Alert,Linking,Button} from "react-native";
+import React, { Commponent } from "react";
+import { View, TouchableOpacity, Dimensions, Platform, Image, LayoutAnimation, Alert, Linking, Button } from "react-native";
 import ModalContact from '../../Components/Modal/ModalContact'
 import Text from "../../Components/Text/Text";
 import ButtonWithIcon from "../../Components/Button/ButtonWithIcon";
@@ -13,7 +13,7 @@ const args = {
     number: '0934197445', // String value with the number to call
     prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call 
 }
-const {height, width} = Dimensions.get("window");
+const { height, width } = Dimensions.get("window");
 export default class ModalContactView extends ModalContact {
     constructor(props) {
         super(props);
@@ -22,7 +22,7 @@ export default class ModalContactView extends ModalContact {
             animationDuration: 150,
             numPhone: '',
             note: '',
-            total:'',
+            total: '',
             warning: false,
             link_facebook: 'https://www.facebook.com/Haisandaiduong3030/',
             link_web: 'http://haisandaiduong.com/',
@@ -31,10 +31,10 @@ export default class ModalContactView extends ModalContact {
         this.onCloseModal = this.onCloseModal.bind(this);
     }
     openModal(params) {
-        this.setState({
-            numPhone: params.numPhone,
-            total: params.total
-        });
+        // this.setState({
+        //     numPhone: params.numPhone,
+        //     total: params.total
+        // });
         super.openModal();
     }
 
@@ -46,13 +46,7 @@ export default class ModalContactView extends ModalContact {
         this.closeModal();
     }
     renderHeader() {
-        return (
-            <View style={{alignItems:'center',height:80}}>
-               <RoundAvatar
-                            uriImage={'https://scontent.fsgn5-1.fna.fbcdn.net/v/t31.0-8/28947677_2062594664016900_292927065248317668_o.jpg?_nc_cat=0&oh=775d76fd07b115764f1f664753d00866&oe=5BE4B82F'}
-                            avatarStyle={{height: 80, width: 80,borderRadius:40,position:'absolute'}}/>
-            </View>
-        );
+        return null;
     }
     openLink(url) {
         Linking.canOpenURL(url).then(supported => {
@@ -66,93 +60,51 @@ export default class ModalContactView extends ModalContact {
     renderContent() {
         return (
             <View>
-                   <ButtonWithIcon
-                        onClick={() => call(args).catch(console.error)}
-                        buttonText={'Liên hệ hải sản đại dương'}
-                        styleText={{
-                            color: global.colorTextPrimary,
-                            fontSize: global.sizeP14,
-                            fontFamily: global.fontBold,
-                            alignSelf: 'center',
-                            textDecorationLine: 'underline',
-                            textAlign: 'center'
-                        }}
-                    />
-                     <ButtonWithIcon
-                        onClick={() =>  this.openLink(this.state.link_web) }
-                        buttonText={'Liên hệ website'}
-                        styleText={{
-                            color: global.colorTextPrimary,
-                            fontSize: global.sizeP14,
-                            fontFamily: global.fontBold,
-                            alignSelf: 'center',
-                            textDecorationLine: 'underline',
-                            textAlign: 'center'
-                        }}
-                    />
-                     <ButtonWithIcon
-                        onClick={() => this.openLink(this.state.link_facebook)}
-                        buttonText={'Liên hện Fanpage'}
-                        styleText={{
-                            color: global.colorTextPrimary,
-                            fontSize: global.sizeP14,
-                            fontFamily: global.fontBold,
-                            alignSelf: 'center',
-                            textDecorationLine: 'underline',
-                            textAlign: 'center'
-                        }}
-                    />
-           
+                <ButtonWithIcon
+                    onClick={() => call(args).catch(console.error)}
+                    style={{ marginTop: 10, backgroundColor: global.colorTextPrimary, paddingHorizontal: 20 }}
+                    buttonText={'Liên hệ cửa hàng'}
+                    styleText={{
+                        color: global.colorFF,
+                        fontSize: global.sizeP16,
+                        fontFamily: global.fontBold,
+                        alignSelf: 'center',
+                        //textDecorationLine: 'underline',
+                        textAlign: 'center'
+                    }}
+                />
+                <ButtonWithIcon
+                    onClick={() => this.openLink(this.state.link_web)}
+                    style={{ marginTop: 10, backgroundColor: global.colorTextPrimary, paddingHorizontal: 20 }}
+                    buttonText={'Website'}
+                    styleText={{
+                        color: global.colorFF,
+                        fontSize: global.sizeP16,
+                        fontFamily: global.fontBold,
+                        alignSelf: 'center',
+                        //textDecorationLine: 'underline',
+                        textAlign: 'center'
+                    }}
+                />
+                <ButtonWithIcon
+                    onClick={() => this.openLink(this.state.link_facebook)}
+                    style={{ marginTop: 10, marginBottom: 10, backgroundColor: global.colorTextPrimary, paddingHorizontal: 20 }}
+                    buttonText={'Fanpage'}
+                    styleText={{
+                        color: global.colorFF,
+                        fontSize: global.sizeP16,
+                        fontFamily: global.fontBold,
+                        alignSelf: 'center',
+                        //textDecorationLine: 'underline',
+                        textAlign: 'center'
+                    }}
+                />
+
             </View>
         );
     }
     renderBottom() {
-        return (
-            <View style={{flexDirection: 'row'}}>
-                <ButtonWithIcon
-                    onClick={() => this.onCloseModal()}
-                    buttonText={'Tiếp tục mua hàng'}
-                    style={{
-                        margin: 5,
-                        height: 40,
-                        backgroundColor: global.colorF3,
-                        borderRadius: 20,
-                        flex: 1,
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                    }}
-                    styleText={{
-                        color: global.colorTextPrimary,
-                        fontSize: global.sizeP14,
-                        fontFamily: global.fontBold,
-                        alignSelf: 'center',
-                        textDecorationLine: 'underline',
-                        textAlign: 'center'
-                    }}
-                />
-                <ButtonWithIcon
-                    onClick={() => this.onAddCartToSever()}
-                    buttonText={'Gửi đơn hàng'}
-                    style={{
-                        margin: 5,
-                        height: 40,
-                        backgroundColor: global.red,
-                        borderRadius: 20,
-                        flex: 1,
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                    }}
-                    styleText={{
-                        color: global.colorFF,
-                        fontSize: global.sizeP14,
-                        fontFamily: global.fontBold,
-                        alignSelf: 'center',
-                        textDecorationLine: 'underline',
-                        textAlign: 'center'
-                    }}
-                />
-            </View>
-        );
+        return null;
     }
 }
 
