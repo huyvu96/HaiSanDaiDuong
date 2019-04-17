@@ -113,31 +113,11 @@ export default class PhoneAuthTest extends Component {
     render() {
         const { user, confirmResult } = this.state;
         return (
-            <View style={{ flex: 1 }}>
-
-                {!user && !confirmResult && this.renderPhoneNumberInput()}
-
-                {this.renderMessage()}
-
-                {!user && confirmResult && this.renderVerificationCodeInput()}
-
-                {user && (
-                    <View
-                        style={{
-                            padding: 15,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            backgroundColor: '#77dd77',
-                            flex: 1,
-                        }}
-                    >
-                        <Image source={{ uri: successImageUri }} style={{ width: 100, height: 100, marginBottom: 25 }} />
-                        <Text style={{ fontSize: 25 }}>Signed In!</Text>
-                        <Text>{JSON.stringify(user)}</Text>
-                        <Button title="Sign Out" color="red" onPress={this.signOut} />
-                    </View>
-                )}
-            </View>
+            <TextInput
+                style={{ height: 40, borderColor: 'gray', borderWidth: 1, padding: 25 }}
+                onChangeText={(text) => this.setState({ text })}
+                value={this.state.text}
+            />
         );
     }
 }

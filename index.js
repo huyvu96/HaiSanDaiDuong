@@ -9,4 +9,4 @@ YellowBox.ignoreWarnings([
   'Warning: Can only update a mounted or mounting component',
 
 ]);
-AppRegistry.registerComponent('HaiSanDaiDuong', () => App);
+AppRegistry.registerComponent('HaiSanDaiDuong', () => App_test);
